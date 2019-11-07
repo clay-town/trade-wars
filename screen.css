@@ -96,7 +96,7 @@ h2 {
   font-family: Brush Script MT;
   font-size: 5.5em;
   color: rgb(147, 164, 180);
-  width:80%;
+  width:60%;
   border-radius:100px;
   background-size: 1700px;
   margin-left: auto;
@@ -155,7 +155,7 @@ input {
     appearance: none;
     font-family: Brush Script MT;
     font-size: 90%;
-    width : 70%;
+    width : 60%;
     height : 90px;
     margin: 30px;
     box-sizing: border-box;
