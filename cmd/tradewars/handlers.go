@@ -2,13 +2,15 @@ package main
 
 import (
     "fmt"
-    "html/template" // New import
-    "log"           // New import
+    "html/template"
+    "log"
     "net/http"
     "strconv"
 )
 
 func home(w http.ResponseWriter, r *http.Request) {
+    log.Println("This is the home function")
+
     if r.URL.Path != "/" && r.URL.Path != "/index.html"{
         http.NotFound(w, r)
         return
@@ -36,6 +38,8 @@ func home(w http.ResponseWriter, r *http.Request) {
 }
 
 func grid(w http.ResponseWriter, r *http.Request) {
+    log.Println("This is the grid function")
+
     if r.URL.Path != "/grid.html" {
         http.NotFound(w, r)
         return
@@ -63,6 +67,8 @@ func grid(w http.ResponseWriter, r *http.Request) {
 }
 
 func trade(w http.ResponseWriter, r *http.Request) {
+    log.Println("This is the trade function")
+
     if r.URL.Path != "/trade.html" {
         http.NotFound(w, r)
         return
@@ -90,6 +96,8 @@ func trade(w http.ResponseWriter, r *http.Request) {
 }
 
 func chat(w http.ResponseWriter, r *http.Request) {
+    log.Println("This is the chat function")
+
     if r.URL.Path != "/chat.html" {
         http.NotFound(w, r)
         return
