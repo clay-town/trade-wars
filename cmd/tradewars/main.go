@@ -3,6 +3,7 @@ package main
 import (
     "log"
     "net/http"
+    "os"
 )
 
 func main() {
@@ -14,8 +15,8 @@ func main() {
     mux.HandleFunc("/snippet", showSnippet)
     mux.HandleFunc("/snippet/create", createSnippet)
 
-    log.Println("Starting server on :80")
-    err := http.ListenAndServe("0.0.0.0:80", mux)
+    log.Println("Starting server on :" + os.Getenv("PORT"))
+    err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
     log.Fatal(err)
 }
 
