@@ -6,7 +6,7 @@ import (
     "os"
 )
 
-func main() {
+/*func main() {
     mux := http.NewServeMux()
     mux.HandleFunc("/", home)
     mux.HandleFunc("/grid.html", grid)
@@ -18,9 +18,9 @@ func main() {
     log.Println("Starting server on :" + os.Getenv("PORT"))
     err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
     log.Fatal(err)
-}
+}*/
 
-/*func main() {
+func main() {
   fs := http.FileServer(http.Dir("internal/ui"))
   http.Handle("/", fs)
   http.Handle("/grid.html", fs)
@@ -33,7 +33,7 @@ func main() {
   mux.HandleFunc("/trade.html", trade)
   mux.HandleFunc("/chat.html", chat)
 
-  log.Println("Starting server on :4000")
-  err := http.ListenAndServe("0.0.0.0:4000", nil)
+  log.Println("Starting server on :" + os.Getenv("PORT"))
+  err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
   log.Fatal(err)
-}*/
+}
