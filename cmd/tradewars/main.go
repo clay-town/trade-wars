@@ -9,6 +9,8 @@ import (
 
 func main() {
 
+
+  // // The following chunk of code is for 'mux'
   //mux := http.NewServeMux()
   //mux.HandleFunc("/", home)
   //mux.HandleFunc("/grid.html", grid)
@@ -17,9 +19,10 @@ func main() {
   //mux.HandleFunc("/click.go", click)
   //mux.HandleFunc("/snippet", showSnippet)
   //mux.HandleFunc("/snippet/create", createSnippet)
+  //err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
 
-  //http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
+  // // This chunk of code is for 'myMux'
   //myMux := mux.NewRouter()
   //myMux.HandleFunc("/", home)
   //myMux.HandleFunc("/index.html", home)
@@ -30,13 +33,18 @@ func main() {
   //myMux.HandleFunc("/snippet", showSnippet)
   //myMux.HandleFunc("/snippet/create", createSnippet)
   //http.Handle("/", myMux)
+  //err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), myMux)
 
+
+  // // This chunk of code uses HandleFunc
   //http.HandleFunc("/", home)
   //http.HandleFunc("/index/", home)
   //http.HandleFunc("/grid/", grid)
   //http.HandleFunc("/trade/", trade)
   //http.HandleFunc("/chat/", chat)
 
+
+  // This chunk of code uses handle
   fs := http.FileServer(http.Dir("internal/ui"))
   http.Handle("/", fs)
   http.Handle("/index.html", fs)
@@ -46,7 +54,11 @@ func main() {
 
   log.Println("Starting server on :" + os.Getenv("PORT"))
   err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), nil)
-  //err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
-  //err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), myMux)
+
+
+
+  //http.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+
+
   log.Fatal(err)
 }
