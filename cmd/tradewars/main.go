@@ -5,6 +5,7 @@ import (
     "net/http"
     "os"
     //"github.com/gorilla/mux"
+    "github.com/joho/godotenv"
 )
 
 func main() {
@@ -51,6 +52,8 @@ func main() {
   http.Handle("/grid.html", fs)
   http.Handle("/trade.html", fs)
   http.Handle("/chat.html", fs)
+
+  godotenv.Load()
 
   log.Println("Starting server on :" + os.Getenv("PORT"))
   err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), nil)
