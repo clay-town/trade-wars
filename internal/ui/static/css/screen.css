@@ -23,7 +23,7 @@ time, mark, audio, video {
   color: #1D0E0E;
   text-align: center;
   font-family: CGF Locust Resistance;
-  background:url("assets/background.gif");
+  background:url("../img/background.gif");
   background-repeat: no-repeat;
   background-size: 100% 100%;
   background-color: #cccccc;
@@ -323,7 +323,7 @@ a:active{
       color: #1D0E0E;
       text-align: center;
       font-family: CGF Locust Resistance;
-      background-image: url("assets/background.gif");
+      background-image: url("../img/background.gif");
       background-color: #cccccc;
       line-height: 2; }
     h2 {

@@ -20,7 +20,7 @@ func home(w http.ResponseWriter, r *http.Request) {
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
     // response to the user.
-    ts, err := template.ParseFiles("internal/ui/index.html")
+    ts, err := template.ParseFiles("internal/ui/html/index.html")
     if err != nil {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
@@ -49,7 +49,7 @@ func grid(w http.ResponseWriter, r *http.Request) {
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
     // response to the user.
-    ts, err := template.ParseFiles("internal/ui/grid.html")
+    ts, err := template.ParseFiles("internal/ui/html/grid.html")
     if err != nil {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
@@ -78,7 +78,7 @@ func trade(w http.ResponseWriter, r *http.Request) {
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
     // response to the user.
-    ts, err := template.ParseFiles("internal/ui/trade.html")
+    ts, err := template.ParseFiles("internal/ui/html/trade.html")
     if err != nil {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
@@ -107,7 +107,7 @@ func chat(w http.ResponseWriter, r *http.Request) {
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
     // response to the user.
-    ts, err := template.ParseFiles("internal/ui/chat.html")
+    ts, err := template.ParseFiles("internal/ui/html/chat.html")
     if err != nil {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
