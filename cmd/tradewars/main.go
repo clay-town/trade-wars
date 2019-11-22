@@ -12,15 +12,12 @@ func main() {
 
 
   // // The following chunk of code is for 'mux'
-  //mux := http.NewServeMux()
-  //mux.HandleFunc("/", home)
-  //mux.HandleFunc("/grid.html", grid)
-  //mux.HandleFunc("/trade.html", trade)
-  //mux.HandleFunc("/chat.html", chat)
-  //mux.HandleFunc("/click.go", click)
-  //mux.HandleFunc("/snippet", showSnippet)
-  //mux.HandleFunc("/snippet/create", createSnippet)
-  //err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
+  // mux := http.NewServeMux()
+  // mux.HandleFunc("/", home)
+  // mux.HandleFunc("/grid.html", grid)
+  // mux.HandleFunc("/trade.html", trade)
+  // mux.HandleFunc("/chat.html", chat)
+  // err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
 
 
   // // This chunk of code is for 'myMux'
@@ -30,9 +27,6 @@ func main() {
   //myMux.HandleFunc("/grid.html", grid)
   //myMux.HandleFunc("/trade.html", trade)
   //myMux.HandleFunc("/chat.html", chat)
-  //myMux.HandleFunc("/click.go", click)
-  //myMux.HandleFunc("/snippet", showSnippet)
-  //myMux.HandleFunc("/snippet/create", createSnippet)
   //http.Handle("/", myMux)
   //err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), myMux)
 
