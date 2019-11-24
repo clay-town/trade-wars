@@ -256,12 +256,33 @@ input {
     appearance: none;
     font-family: Brush Script MT;
     font-size: 90%;
-    width : 60%;
+    width : 50%;
     height : 90px;
     margin: 30px;
     box-sizing: border-box;
     vertical-align: center;
     position: center;
+  }
+
+  button {
+    width: 200px;
+    height: 100px;
+    background-image: radial-gradient( rgb(28, 212, 194), rgb(15, 158, 146), rgb(28, 63, 59));
+    border: 5px solid rgb(4, 26, 23);
+    -webkit-text-stroke: 2px rgb(6, 58, 54);
+    background-position:center;
+    background-repeat:no-repeat;
+    text-align: center;
+    border-radius:100px;
+    font-family: Brush Script MT;
+    font-size: 60px;
+    align-self: center;
+  }
+
+  button:hover{
+    color:rgb(60, 133, 125);
+    -webkit-text-stroke: 1px rgb(26, 80, 75);
+    text-shadow: 2px 2px 5px rgb(107, 182, 176);
   }
 
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary {

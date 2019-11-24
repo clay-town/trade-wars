@@ -8,6 +8,42 @@ import (
     "strconv"
 )
 
+func playersHandler(w http.ResponseWriter, r *http.Request) {
+    log.Println("This is the players function")
+
+    if r.Method == http.MethodGet {
+
+        log.Println("This is the GET method")
+
+        ts, err := template.ParseFiles("internal/ui/html/index.html")
+        if err != nil {
+            log.Println(err.Error())
+            http.Error(w, "Internal Server Error", 500)
+            return
+        }
+
+        err = ts.Execute(w, nil)
+        if err != nil {
+            log.Println(err.Error())
+            http.Error(w, "Internal Server Error", 500)
+        }
+
+    } else if r.Method == http.MethodPost {
+
+        log.Println("This is the POST method")
+
+        err := r.ParseForm()
+        if err != nil {
+            log.Println(err.Error())
+            http.Error(w, "Internal Server Error", 500)
+        }
+        callsign := r.Form.Get("callsign")
+        log.Println(callsign)
+
+        http.Redirect(w, r, "/map.html", http.StatusSeeOther)
+    }
+}
+
 func home(w http.ResponseWriter, r *http.Request) {
     log.Println("This is the home function")
 
@@ -37,10 +73,10 @@ func home(w http.ResponseWriter, r *http.Request) {
     }
 }
 
-func grid(w http.ResponseWriter, r *http.Request) {
-    log.Println("This is the grid function")
+func mapHandler(w http.ResponseWriter, r *http.Request) {
+    log.Println("This is the map function")
 
-    if r.URL.Path != "/grid.html" {
+    if r.URL.Path != "/map.html" {
         http.NotFound(w, r)
         return
     }
@@ -49,7 +85,7 @@ func grid(w http.ResponseWriter, r *http.Request) {
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
     // response to the user.
-    ts, err := template.ParseFiles("internal/ui/html/grid.html")
+    ts, err := template.ParseFiles("internal/ui/html/map.html")
     if err != nil {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)

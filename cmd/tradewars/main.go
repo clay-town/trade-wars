@@ -10,8 +10,11 @@ import (
 func main() {
   fs := http.FileServer(http.Dir("./internal/ui/static/"))
   mux := http.NewServeMux()
+  mux.HandleFunc("/players", playersHandler)
   mux.HandleFunc("/", home)
-  mux.HandleFunc("/grid.html", grid)
+  mux.HandleFunc("/index.html", home)
+  mux.HandleFunc("/map.html", mapHandler)
+  mux.HandleFunc("/map", mapHandler)
   mux.HandleFunc("/trade.html", trade)
   mux.HandleFunc("/chat.html", chat)
   mux.Handle("/static/", http.StripPrefix("/static", fs))
