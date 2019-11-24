@@ -53,7 +53,7 @@ func playersHandler(w http.ResponseWriter, r *http.Request) {
     }
 }
 
-func home(w http.ResponseWriter, r *http.Request) {
+func homeHandler(w http.ResponseWriter, r *http.Request) {
     log.Println("This is the home function")
 
     if r.URL.Path != "/" && r.URL.Path != "/index.html"{
@@ -124,13 +124,24 @@ func mapHandler(w http.ResponseWriter, r *http.Request) {
     }
 }
 
-func trade(w http.ResponseWriter, r *http.Request) {
+func tradeHandler(w http.ResponseWriter, r *http.Request) {
     log.Println("This is the trade function")
+
+    var cookie, err = r.Cookie("callsign")
+    if err != nil {
+        log.Println(err.Error())
+        http.Error(w, "Internal Server Error: Could not obtain callsign from cookie", 500)
+        return
+    }
+    callsign := cookie.Value
+    log.Println("from trade handler - Callsign: " + callsign)
 
     if r.URL.Path != "/trade.html" {
         http.NotFound(w, r)
         return
     }
+
+    htmlCallsign := map[string]interface{}{"callsign": callsign}
 
     // Use the template.ParseFiles() function to read the template file into a
     // template set. If there's an error, we log the detailed error message and use
@@ -146,20 +157,31 @@ func trade(w http.ResponseWriter, r *http.Request) {
     // We then use the Execute() method on the template set to write the template
     // content as the response body. The last parameter to Execute() represents any
     // dynamic data that we want to pass in, which for now we'll leave as nil.
-    err = ts.Execute(w, nil)
+    err = ts.Execute(w, htmlCallsign)
     if err != nil {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
     }
 }
 
-func chat(w http.ResponseWriter, r *http.Request) {
+func chatHandler(w http.ResponseWriter, r *http.Request) {
     log.Println("This is the chat function")
+
+    var cookie, err = r.Cookie("callsign")
+    if err != nil {
+        log.Println(err.Error())
+        http.Error(w, "Internal Server Error: Could not obtain callsign from cookie", 500)
+        return
+    }
+    callsign := cookie.Value
+    log.Println("from chat handler - Callsign: " + callsign)
 
     if r.URL.Path != "/chat.html" {
         http.NotFound(w, r)
         return
     }
+
+    htmlCallsign := map[string]interface{}{"callsign": callsign}
 
     // Use the template.ParseFiles() function to read the template file into a
     // template set. If there's an error, we log the detailed error message and use
@@ -175,7 +197,7 @@ func chat(w http.ResponseWriter, r *http.Request) {
     // We then use the Execute() method on the template set to write the template
     // content as the response body. The last parameter to Execute() represents any
     // dynamic data that we want to pass in, which for now we'll leave as nil.
-    err = ts.Execute(w, nil)
+    err = ts.Execute(w, htmlCallsign)
     if err != nil {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
