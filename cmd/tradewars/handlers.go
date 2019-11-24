@@ -6,6 +6,7 @@ import (
     "log"
     "net/http"
     "strconv"
+    "time"
 )
 
 func playersHandler(w http.ResponseWriter, r *http.Request) {
@@ -39,6 +40,14 @@ func playersHandler(w http.ResponseWriter, r *http.Request) {
         }
         callsign := r.Form.Get("callsign")
         log.Println(callsign)
+
+        cookie := http.Cookie {
+            Name: "callsign",
+            Value: callsign,
+            Expires: time.Now().AddDate(0, 0, 1),
+            Path: "/",
+        }
+        http.SetCookie(w, &cookie)
 
         http.Redirect(w, r, "/map.html", http.StatusSeeOther)
     }
@@ -76,7 +85,17 @@ func home(w http.ResponseWriter, r *http.Request) {
 func mapHandler(w http.ResponseWriter, r *http.Request) {
     log.Println("This is the map function")
 
-    if r.URL.Path != "/map.html" {
+    var cookie, err = r.Cookie("callsign")
+    if err != nil {
+        log.Println(err.Error())
+        http.Error(w, "Internal Server Error: Could not obtain callsign from cookie", 500)
+        return
+    }
+    callsign := cookie.Value
+    log.Println("from map handler - Callsign: " + callsign)
+    //w.Write([]byte(callsign))
+
+    if r.URL.Path != "/map.html" && r.URL.Path != "/map"{
         http.NotFound(w, r)
         return
     }
