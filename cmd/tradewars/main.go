@@ -23,6 +23,6 @@ func main() {
 	godotenv.Load()
 
 	log.Println("Starting server on " + os.Getenv("PORT"))
-	err := http.ListenAndServe(os.Getenv("PORT"), mux)
+	err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
 	log.Fatal(err)
 }
