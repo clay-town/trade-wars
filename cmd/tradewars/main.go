@@ -4,12 +4,11 @@ import (
 	"log"
 	"net/http"
 	"os"
-
 	"github.com/joho/godotenv"
 )
 
 func main() {
-	fs := http.FileServer(http.Dir("./internal/ui/static/"))
+	fs := http.FileServer(http.Dir("./internal/ui/static"))
 	mux := http.NewServeMux()
 	mux.HandleFunc("/players", playersHandler)
 	mux.HandleFunc("/", homeHandler)
