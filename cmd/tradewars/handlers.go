@@ -10,12 +10,7 @@ import (
 )
 
 func playersHandler(w http.ResponseWriter, r *http.Request) {
-    log.Println("This is the players function")
-
     if r.Method == http.MethodGet {
-
-        log.Println("This is the GET method")
-
         ts, err := template.ParseFiles("internal/ui/html/index.html")
         if err != nil {
             log.Println(err.Error())
@@ -30,17 +25,12 @@ func playersHandler(w http.ResponseWriter, r *http.Request) {
         }
 
     } else if r.Method == http.MethodPost {
-
-        log.Println("This is the POST method")
-
         err := r.ParseForm()
         if err != nil {
             log.Println(err.Error())
             http.Error(w, "Internal Server Error", 500)
         }
         callsign := r.Form.Get("callsign")
-        log.Println(callsign)
-
         cookie := http.Cookie {
             Name: "callsign",
             Value: callsign,
@@ -48,19 +38,15 @@ func playersHandler(w http.ResponseWriter, r *http.Request) {
             Path: "/",
         }
         http.SetCookie(w, &cookie)
-
         http.Redirect(w, r, "/map.html", http.StatusSeeOther)
     }
 }
 
 func homeHandler(w http.ResponseWriter, r *http.Request) {
-    log.Println("This is the home function")
-
     if r.URL.Path != "/" && r.URL.Path != "/index.html"{
         http.NotFound(w, r)
         return
     }
-
     // Use the template.ParseFiles() function to read the template file into a
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
@@ -71,7 +57,6 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Internal Server Error", 500)
         return
     }
-
     // We then use the Execute() method on the template set to write the template
     // content as the response body. The last parameter to Execute() represents any
     // dynamic data that we want to pass in, which for now we'll leave as nil.
@@ -83,8 +68,6 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func mapHandler(w http.ResponseWriter, r *http.Request) {
-    log.Println("This is the map function")
-
     var cookie, err = r.Cookie("callsign")
     if err != nil {
         log.Println(err.Error())
@@ -92,17 +75,11 @@ func mapHandler(w http.ResponseWriter, r *http.Request) {
         return
     }
     callsign := cookie.Value
-    log.Println("from map handler - Callsign: " + callsign)
-    //w.Write([]byte(callsign))
-
     if r.URL.Path != "/map.html" && r.URL.Path != "/map"{
         http.NotFound(w, r)
         return
     }
-
     htmlCallsign := map[string]interface{}{"callsign": callsign}
- 
-
     // Use the template.ParseFiles() function to read the template file into a
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
@@ -113,7 +90,6 @@ func mapHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Internal Server Error", 500)
         return
     }
-
     // We then use the Execute() method on the template set to write the template
     // content as the response body. The last parameter to Execute() represents any
     // dynamic data that we want to pass in, which for now we'll leave as nil.
@@ -125,8 +101,6 @@ func mapHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func tradeHandler(w http.ResponseWriter, r *http.Request) {
-    log.Println("This is the trade function")
-
     var cookie, err = r.Cookie("callsign")
     if err != nil {
         log.Println(err.Error())
@@ -135,14 +109,11 @@ func tradeHandler(w http.ResponseWriter, r *http.Request) {
     }
     callsign := cookie.Value
     log.Println("from trade handler - Callsign: " + callsign)
-
     if r.URL.Path != "/trade.html" {
         http.NotFound(w, r)
         return
     }
-
     htmlCallsign := map[string]interface{}{"callsign": callsign}
-
     // Use the template.ParseFiles() function to read the template file into a
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
@@ -153,7 +124,6 @@ func tradeHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Internal Server Error", 500)
         return
     }
-
     // We then use the Execute() method on the template set to write the template
     // content as the response body. The last parameter to Execute() represents any
     // dynamic data that we want to pass in, which for now we'll leave as nil.
@@ -165,8 +135,6 @@ func tradeHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func chatHandler(w http.ResponseWriter, r *http.Request) {
-    log.Println("This is the chat function")
-
     var cookie, err = r.Cookie("callsign")
     if err != nil {
         log.Println(err.Error())
@@ -180,9 +148,7 @@ func chatHandler(w http.ResponseWriter, r *http.Request) {
         http.NotFound(w, r)
         return
     }
-
     htmlCallsign := map[string]interface{}{"callsign": callsign}
-
     // Use the template.ParseFiles() function to read the template file into a
     // template set. If there's an error, we log the detailed error message and use
     // the http.Error() function to send a generic 500 Internal Server Error
@@ -193,7 +159,6 @@ func chatHandler(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Internal Server Error", 500)
         return
     }
-
     // We then use the Execute() method on the template set to write the template
     // content as the response body. The last parameter to Execute() represents any
     // dynamic data that we want to pass in, which for now we'll leave as nil.
@@ -210,7 +175,6 @@ func showSnippet(w http.ResponseWriter, r *http.Request) {
         http.NotFound(w, r)
         return
     }
-
     fmt.Fprintf(w, "Display a specific snippet with ID %d...", id)
 }
 
@@ -220,6 +184,5 @@ func createSnippet(w http.ResponseWriter, r *http.Request) {
         http.Error(w, "Method Not Allowed", 405)
         return
     }
-
     w.Write([]byte("Create a new snippet..."))
 }
