@@ -8,8 +8,6 @@ import (
     "net/http"
     "strconv"
     "time"
-    "io/ioutil"
-    "encoding/json"
 )
 
 var jsonShips = s.Ships{
@@ -20,28 +18,18 @@ var jsonShips = s.Ships{
 }
 
 func createNewUser(w http.ResponseWriter, r *http.Request){
-    var newShip s.Ship
-    reqBody, err := ioutil.ReadAll(r.Body)
-    if err != nil {
-        fmt.Fprintf(w, "Error in user creation")
+    if r.Method == "GET" {
+        fmt.Println("Hello World")
     }
-    json.Unmarshal(reqBody, &newShip)
-    jsonShips = append(jsonShips, newShip)
-    w.WriteHeader(http.StatusCreated)
-    json.NewEncoder(w).Encode(newShip)
+    if r.Method == "POST" {
+        var newShip s.Ship
+        newShip.Callsign = r.FormValue("callsign")
+        newShip.Location = "x3y5"
+        jsonShips = append(jsonShips, newShip)
+
+        http.Redirect(w, r, "/", http.StatusSeeOther)
+    }
 }
-
-// func returnUserInfo(w http.ResponseWriter, r *http.Request) {
-//     userID := mux.Vars(r)["id"]
-//
-//     for _, Ship := range jsonShips {
-//         if Ship.Callsign == userID {
-//             json.NewEncoder(w).Encode(Ship)
-//         }
-//     }
-// }
-
-//Add function to update ships information
 
 func playersHandler(w http.ResponseWriter, r *http.Request) {
     if r.Method == http.MethodGet {
@@ -99,6 +87,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
     }
+    log.Println(jsonShips)
 }
 
 func mapHandler(w http.ResponseWriter, r *http.Request) {
