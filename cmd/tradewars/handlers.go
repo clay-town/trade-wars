@@ -1,13 +1,47 @@
 package main
 
 import (
+    s "github.com/clay-town/trade-wars/internal/tradewars"
     "fmt"
     "html/template"
     "log"
     "net/http"
     "strconv"
     "time"
+    "io/ioutil"
+    "encoding/json"
 )
+
+var jsonShips = s.Ships{
+    {
+        Callsign:   "aluminum-raccoon",
+        Location:   "x4y8",
+    },
+}
+
+func createNewUser(w http.ResponseWriter, r *http.Request){
+    var newShip s.Ship
+    reqBody, err := ioutil.ReadAll(r.Body)
+    if err != nil {
+        fmt.Fprintf(w, "Error in user creation")
+    }
+    json.Unmarshal(reqBody, &newShip)
+    jsonShips = append(jsonShips, newShip)
+    w.WriteHeader(http.StatusCreated)
+    json.NewEncoder(w).Encode(newShip)
+}
+
+// func returnUserInfo(w http.ResponseWriter, r *http.Request) {
+//     userID := mux.Vars(r)["id"]
+//
+//     for _, Ship := range jsonShips {
+//         if Ship.Callsign == userID {
+//             json.NewEncoder(w).Encode(Ship)
+//         }
+//     }
+// }
+
+//Add function to update ships information
 
 func playersHandler(w http.ResponseWriter, r *http.Request) {
     if r.Method == http.MethodGet {

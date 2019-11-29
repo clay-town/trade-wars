@@ -1,14 +1,14 @@
 package main
 
 import (
-	"log"
+    "log"
 	"net/http"
 	"os"
-	"github.com/joho/godotenv"
+    "github.com/joho/godotenv"
 )
 
 func main() {
-	fs := http.FileServer(http.Dir("./internal/ui/static"))
+	fs := http.FileServer(http.Dir("./internal/ui/static/"))
 	mux := http.NewServeMux()
 	mux.HandleFunc("/players", playersHandler)
 	mux.HandleFunc("/", homeHandler)
@@ -17,7 +17,9 @@ func main() {
 	mux.HandleFunc("/map", mapHandler)
 	mux.HandleFunc("/trade.html", tradeHandler)
 	mux.HandleFunc("/chat.html", chatHandler)
-	mux.Handle("/static/", http.StripPrefix("/static", fs))
+    mux.HandleFunc("/createNewUser", createNewUser)
+    //mux.HandleFunc("/returnUserInfo", returnUserInfo)
+    mux.Handle("/static/", http.StripPrefix("/static", fs))
 
 	godotenv.Load()
 
