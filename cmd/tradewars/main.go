@@ -2,6 +2,9 @@ package main
 
 import (
     s "github.com/clay-town/trade-wars/internal/tradewars"
+    // "github.com/PuerkitoBio/goquery"
+    // "github.com/gopherjs/gopherjs/js"
+    // "strings"
     "log"
 	"net/http"
 	"os"
@@ -13,8 +16,7 @@ var jsonShips s.Ships
 
 func main() {
     unmarshalJSONFile()
-
-	fs := http.FileServer(http.Dir("./internal/ui/static/"))
+   	fs := http.FileServer(http.Dir("./internal/ui/static/"))
 	mux := http.NewServeMux()
 	mux.HandleFunc("/players", playersHandler)
 	mux.HandleFunc("/", homeHandler)
@@ -26,13 +28,17 @@ func main() {
     mux.HandleFunc("/createNewUser", createNewUser)
     //mux.HandleFunc("/returnUserInfo", returnUserInfo)
     mux.Handle("/static/", http.StripPrefix("/static", fs))
-
 	godotenv.Load()
-
 	log.Println("Starting server on " + os.Getenv("PORT"))
 	err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
 	log.Fatal(err)
 }
+
+// func putShipOnMap() {
+//     js.Global.Get("http://localhost:5000/map.html.document")
+//     doc, _ := goquery.NewDocumentFromReader(strings.NewReader(("http://localhost:5000/map.html")))
+//     doc.Find("#x2y7").SetHtml("<span>hello world</span>")
+// }
 
 func unmarshalJSONFile() {
     jsonFile, err := os.Open("internal/tradewars/data.json")
