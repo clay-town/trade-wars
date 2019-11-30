@@ -1,3 +1,7 @@
 package tradewars
 
-type Ships []Ship
+type Ships struct {
+    Ships []Ship `json:"ships"`
+}
+
+//type Ships []Ship

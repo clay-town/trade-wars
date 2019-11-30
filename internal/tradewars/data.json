@@ -1,0 +1,12 @@
+{
+    "ships": [
+        {
+         "callsign": "aluminum-raccoon",
+         "location": "x4y8"
+        },
+        {
+         "callsign": "clay-town",
+         "location": "x2y9"
+        }
+    ]
+}

@@ -10,13 +10,6 @@ import (
     "time"
 )
 
-var jsonShips = s.Ships{
-    {
-        Callsign:   "aluminum-raccoon",
-        Location:   "x4y8",
-    },
-}
-
 func createNewUser(w http.ResponseWriter, r *http.Request){
     if r.Method == "GET" {
         fmt.Println("Hello World")
@@ -25,7 +18,7 @@ func createNewUser(w http.ResponseWriter, r *http.Request){
         var newShip s.Ship
         newShip.Callsign = r.FormValue("callsign")
         newShip.Location = "x3y5"
-        jsonShips = append(jsonShips, newShip)
+        //jsonShips = append(jsonShips, newShip)
 
         http.Redirect(w, r, "/", http.StatusSeeOther)
     }
@@ -121,6 +114,7 @@ func mapHandler(w http.ResponseWriter, r *http.Request) {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
     }
+    //tablecell.Set("innerHTML", "Ship")
 }
 
 func tradeHandler(w http.ResponseWriter, r *http.Request) {
