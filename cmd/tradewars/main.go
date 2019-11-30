@@ -10,10 +10,12 @@ import (
   "encoding/json"
 )
 var jsonShips s.Ships
+var jsonStations s.Stations
 var mux = http.NewServeMux()
 
 func main() {
   unmarshalJSONFile()
+  unmarshalStations()
   fs := http.FileServer(http.Dir("./internal/ui/static/"))
 
 	mux.HandleFunc("/players", playersHandler)
@@ -24,14 +26,15 @@ func main() {
 	mux.HandleFunc("/trade.html", tradeHandler)
 	mux.HandleFunc("/chat.html", chatHandler)
   mux.HandleFunc("/createNewUser", createNewUser)
-  mux.HandleFunc("/returnMapInfo", returnMapInfo)
+  mux.HandleFunc("/stationInformation", returnStationInformation)
+  mux.HandleFunc("/playerInformation", returnPlayerInformation)
   mux.Handle("/static/", http.StripPrefix("/static", fs))
 	godotenv.Load()
 	log.Println("Starting server on " + os.Getenv("PORT"))
 	err := http.ListenAndServe(os.Getenv("CHROMEHOST") + ":" + os.Getenv("PORT"), mux)
 	log.Fatal(err)
 }
-
+ // refactor these functions into one another
 func unmarshalJSONFile() {
     jsonFile, err := os.Open("internal/tradewars/data.json")
     if err!= nil{
@@ -42,5 +45,18 @@ func unmarshalJSONFile() {
     json.Unmarshal(byteValue, &jsonShips)
     for i := 0; i < len(jsonShips.Ships); i++ {
         log.Println("Ship Location: " + jsonShips.Ships[i].Location)
+    }
+}
+
+func unmarshalStations() {
+    jsonFile, err := os.Open("internal/tradewars/data.json")
+    if err!= nil{
+        log.Println(err)
+    }
+    byteValue, _ := ioutil.ReadAll(jsonFile)
+    defer jsonFile.Close()
+    json.Unmarshal(byteValue, &jsonStations)
+    for i := 0; i < len(jsonStations.Stations); i++ {
+        log.Println("Station Name: " + jsonStations.Stations[i].Designation)
     }
 }

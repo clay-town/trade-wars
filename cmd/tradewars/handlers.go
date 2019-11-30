@@ -8,12 +8,22 @@ import (
     "net/http"
     "strconv"
     "time"
+    "encoding/json"
 )
 
-func returnMapInfo(w http.ResponseWriter, r *http.Request) {
-  // Map information is only the location of the stations 
+func returnPlayerInformation(w http.ResponseWriter, r *http.Request) {
+  // returns information for ship matching the users callsign
+  userID := mux.Vars(r)["callsign"]
+  log.Println(userID)
+  for i := 0; i < len(jsonShips.Ships); i++ {
+      log.Println("Ship Location: " + jsonShips.Ships[i].Location)
+  }
+    json.NewEncoder(w).Encode(jsonShips)
+}
 
-    fmt.Fprintf(w, "Returning map information")
+func returnStationInformation(w http.ResponseWriter, r *http.Request) {
+    // returns information for all of the stations
+    json.NewEncoder(w).Encode(jsonStations)
 }
 
 func mapHandler(w http.ResponseWriter, r *http.Request) {
@@ -117,7 +127,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
     }
-    log.Println(jsonShips)
+    log.Println(jsonStations)
 }
 
 func tradeHandler(w http.ResponseWriter, r *http.Request) {
