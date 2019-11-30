@@ -15,3 +15,6 @@ for (var y = 0; y < 10; y++) {
 document.getElementById("tableLocation").innerHTML = html
 //document.getElementById(stationLocation).innerHTML = stationName1
 //document.getElementById(shipLocation).innerHTML = shipName1
+
+
+//make call to db to retrieve ship information

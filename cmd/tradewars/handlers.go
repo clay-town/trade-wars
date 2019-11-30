@@ -10,6 +10,12 @@ import (
     "time"
 )
 
+func returnMapInfo(w http.ResponseWriter, r *http.Request) {
+  // Map information is only the location of the stations 
+
+    fmt.Fprintf(w, "Returning map information")
+}
+
 func mapHandler(w http.ResponseWriter, r *http.Request) {
     var cookie, err = r.Cookie("callsign")
     if err != nil {
@@ -47,7 +53,6 @@ func mapHandler(w http.ResponseWriter, r *http.Request) {
 
 func createNewUser(w http.ResponseWriter, r *http.Request){
     if r.Method == "GET" {
-        fmt.Println("Hello World")
     }
     if r.Method == "POST" {
         var newShip s.Ship
@@ -66,13 +71,11 @@ func playersHandler(w http.ResponseWriter, r *http.Request) {
             http.Error(w, "Internal Server Error", 500)
             return
         }
-
         err = ts.Execute(w, nil)
         if err != nil {
             log.Println(err.Error())
             http.Error(w, "Internal Server Error", 500)
         }
-
     } else if r.Method == http.MethodPost {
         err := r.ParseForm()
         if err != nil {

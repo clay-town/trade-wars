@@ -8,5 +8,15 @@
          "callsign": "clay-town",
          "location": "x2y9"
         }
+    ],
+    "stations": [
+        {
+         "designation": "Alpha Centauri",
+         "location": "x2y4"
+        },
+        {
+         "designation": "Luna",
+         "location": "x8y3"
+        }
     ]
 }

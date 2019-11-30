@@ -4,9 +4,10 @@
     <meta charset="utf-8" />
     <link href="./../static/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
     <title>Trade Wars</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="./../static/restcalls.js"></script>
   </head>
   <body class="index">
-
     <div id="main" role="main">
     <h1>
 	  	Trade Wars
@@ -20,19 +21,13 @@
 						<form action="/players" method="POST">
 								Name:
 								<input type="text" name="callsign">
-								<!--<a href="grid.html">
-									<img class="center" src="../static/img/button.png" alt="Button" style="width:100px;height:100px;float:right;">
-								</a>-->
 								<button name="submit_login" type="submit" class="login" value="Submit">Login</button>
 						</form>
-                        <form action="/createNewUser" method="POST">
-                                Name:
-                                <input type="text" name="callsign">
-                                <!--<a href="grid.html">
-                                    <img class="center" src="../static/img/button.png" alt="Button" style="width:100px;height:100px;float:right;">
-                                </a>-->
-                                <button name="create" type="submit" class="createNewUser" value="Submit">Create</button>
-                        </form>
+            <form action="/createNewUser" method="POST"> <!-- Refactor this into restcalls.js -->
+                Name:
+                <input type="text" name="callsign">
+                <button name="create" type="submit" class="createNewUser" value="Submit">Create</button>
+            </form>
 					</h2>
 					<br>
 					<br>
@@ -51,38 +46,6 @@
 					<br>
 					<br>
 					<br>
-					<br>
-					<!--<div class="desktop">
-							<div class="row">
-									<br>
-									<div class="column">
-											<h2>
-												<img class="center" src="button.png" alt="Button" style="width:100px;height:100px;float:right;">
-												<a href="index.html">Name</a>
-											</h2>
-											<br>
-											<br>
-									</div>
-									<div class="column">
-											<br>
-											<br>
-									</div>
-								</div>
-					</div>
-					<div class="mobile_device_480px">
-							<br>
-							<h2>
-								<img class="center" src="button.png" alt="Button" style="width:100px;height:100px;float:right;">
-								<a href="index.html">Name</a>
-							</h2>
-							<br>
-							<br>
-							<br>
-					</div>
-					<h3>
-							Text: <br>
-							<br> <br>
-					</h3>-->
 					<br>
 					<br>
 			</div>
