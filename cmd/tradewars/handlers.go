@@ -9,16 +9,17 @@ import (
     "strconv"
     "time"
     "encoding/json"
+  //  "github.com/gorilla/mux"
 )
 
 func returnPlayerInformation(w http.ResponseWriter, r *http.Request) {
   // returns information for ship matching the users callsign
-  userID := mux.Vars(r)["callsign"]
-  log.Println(userID)
+  callsign := r.URL.Query().Get("callsign")
   for i := 0; i < len(jsonShips.Ships); i++ {
-      log.Println("Ship Location: " + jsonShips.Ships[i].Location)
+      if callsign == jsonShips.Ships[i].Callsign {
+        json.NewEncoder(w).Encode(jsonShips.Ships[i])
+      }
   }
-    json.NewEncoder(w).Encode(jsonShips)
 }
 
 func returnStationInformation(w http.ResponseWriter, r *http.Request) {

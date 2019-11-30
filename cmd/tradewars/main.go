@@ -8,16 +8,16 @@ import (
   "github.com/joho/godotenv"
   "io/ioutil"
   "encoding/json"
+  //"github.com/gorilla/mux"
 )
 var jsonShips s.Ships
 var jsonStations s.Stations
-var mux = http.NewServeMux()
 
 func main() {
   unmarshalJSONFile()
   unmarshalStations()
   fs := http.FileServer(http.Dir("./internal/ui/static/"))
-
+  mux := http.NewServeMux()
 	mux.HandleFunc("/players", playersHandler)
 	mux.HandleFunc("/", homeHandler)
 	mux.HandleFunc("/index.html", homeHandler)
@@ -27,7 +27,7 @@ func main() {
 	mux.HandleFunc("/chat.html", chatHandler)
   mux.HandleFunc("/createNewUser", createNewUser)
   mux.HandleFunc("/stationInformation", returnStationInformation)
-  mux.HandleFunc("/playerInformation", returnPlayerInformation)
+  mux.HandleFunc("/playerInformation/", returnPlayerInformation)
   mux.Handle("/static/", http.StripPrefix("/static", fs))
 	godotenv.Load()
 	log.Println("Starting server on " + os.Getenv("PORT"))
