@@ -18,8 +18,7 @@ func playersHandler(w http.ResponseWriter, r *http.Request) {
     log.Println(callsign)
     for i := 0; i < len(jsonShips.Ships); i++ {
         if callsign == jsonShips.Ships[i].Callsign {
-          // match found, return in the positive
-          // set cookie
+          // match found : set cookie
           cookie := http.Cookie {
                   Name: "callsign",
                   Value: callsign,
@@ -31,6 +30,7 @@ func playersHandler(w http.ResponseWriter, r *http.Request) {
           return
         }
     }
+    // No match found
     w.WriteHeader(http.StatusInternalServerError)
 }
 

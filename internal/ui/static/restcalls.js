@@ -35,20 +35,23 @@ function userLogin() {
   request.send()
 }
 
+// This function listens for the user to click the login button 
 $(document).ready(function(){
   $("#one").click(function(){
     var request = new XMLHttpRequest()
     var callsign = $('#callsigninput').val();
     request.open('POST', '/players?callsign='+callsign, true)
     request.onload = function(response){
-      console.log(response)
       console.log(response.currentTarget.status)
-      //var data = JSON.parse(this.response)
-      // check headers:
-      // success: redirect
-    //  window.location = "/map.html"
+      var status = response.currentTarget.status;
+      if status == 200 { // success
+          //redirect page to map
+          window.location = "/map.html"
+          //initilize map population functions
+      } else if (status == 500 ) { //failure
+          //insert prompt for user to create a new handle
+      }
     }
-
     request.send()
   });
 });
