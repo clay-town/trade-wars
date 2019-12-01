@@ -1,7 +1,16 @@
 // refactor structs so that they carry their own image
+var script = document.createElement('script');
+script.src = 'https://code.jquery.com/jquery-3.4.1.min.js';
+script.type = 'text/javascript';
+document.getElementsByTagName('head')[0].appendChild(script);
+
 var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
+
+function tradeWithStation(callsign, designation) {
+
+}
 
 function moveShip(callsign, direction) {
   var request = new XMLHttpRequest()
@@ -10,15 +19,17 @@ function moveShip(callsign, direction) {
     var data = JSON.parse(this.response)
     // data is a 2d array. the 0th Element :[previousLocation, newlocation]
     //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
-    updateMap(data)
+    updateMap(data, callsign)
   }
   request.send()
 }
 
   // some of this needs to be moved out of updateMap
-  // What if a player starts on a station? 
+  // What if a player starts on a station?
+  // Create a function that checks for nearby ships and stations
 
-function updateMap(data) {
+function updateMap(data, callsign) {
+  tradeButton = "<button id='dynamicTradeButton' type='submit'>Trade</button>"
   newLoc = data[0][1]
   oldLoc = data[0][0]
   stationLoc1 = data[1][1]
@@ -30,12 +41,12 @@ function updateMap(data) {
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
       //insert station name & trade button into Dom
       document.getElementById("nearby").innerHTML = stationName1;
-      document.getElementById("tradeButton").innerHTML = "<button onclick='alert()'; type='submit'>Trade</button>"
+      document.getElementById("tradeButton").innerHTML = tradeButton
   } else if (newLoc == stationLoc2) {
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
     //insert station name & trade button into Dom
     document.getElementById("nearby").innerHTML = stationName2;
-    document.getElementById("tradeButton").innerHTML = "<button onclick='alert()'; type='submit'>Trade</button>"
+    document.getElementById("tradeButton").innerHTML = tradeButton
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
