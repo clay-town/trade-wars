@@ -7,6 +7,12 @@ document.getElementById("tableLocation").innerHTML = html // place grid in DOM
 updateLocalPlayerInformation('clay-town');                // place player information in DOM
 updateLocalSpaceStationInformation();                     // place stations on map
 
+$("form").on('submit', function (e) {
+   userLogin()
+   //stop form submission
+   e.preventDefault();
+});
+
 function moveShip(callsign, direction) {
   var request = new XMLHttpRequest()
   request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
@@ -51,7 +57,6 @@ function updateLocalPlayerInformation(callsign){
     var data = JSON.parse(this.response)
     document.getElementById(data.location).innerHTML = shipName1
     document.getElementById("cubits").innerHTML = data["cubits"]
-    console.log(data["cargos"].length)
     cargo = ""
     for (i = 0; i<data["cargos"].length; i++){
       cargo += data.cargos[i].item + ": " + data.cargos[i].quantitiy + "<br>"

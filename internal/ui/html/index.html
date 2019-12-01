@@ -5,7 +5,7 @@
     <link href="./../static/css/screen.css" media="screen" rel="stylesheet" type="text/css" />
     <title>Trade Wars</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script type="text/javascript" src="./../static/restcalls.js"></script>
+
   </head>
   <body class="index">
     <div id="main" role="main">
@@ -18,11 +18,10 @@
 					<br>
 					<br>
 					<h2>
-						<form action="/players" method="POST">
-								Name:
-								<input type="text" name="callsign">
-								<button name="submit_login" type="submit" class="login" value="Submit">Login</button>
-						</form>
+						Name:
+						<input id="callsigninput" type="text" name="callsign">
+						<button id="one" name="submit_login" type="submit" class="login" value="Submit">Login</button>
+
             <form action="/createNewUser" method="POST"> <!-- Refactor this into restcalls.js -->
                 Name:
                 <input type="text" name="callsign">
@@ -49,5 +48,6 @@
 					<br>
 					<br>
 			</div>
+      <script type="text/javascript" src="./../static/restcalls.js"></script>
   </body>
 </html>

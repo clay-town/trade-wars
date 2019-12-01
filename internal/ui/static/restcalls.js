@@ -24,3 +24,27 @@ function createNewUser(){
   }
   request.send()
 }
+
+function userLogin() {
+  var request = new XMLHttpRequest()
+  request.open('POST', '/players', true)
+  request.onload = function(){
+  //  var data = JSON.parse(this.response)
+
+  }
+  request.send()
+}
+
+$(document).ready(function(){
+  $("#one").click(function(){
+    var request = new XMLHttpRequest()
+    var callsign = $('#callsigninput').val();
+    request.open('POST', '/players?callsign='+callsign, true)
+    request.onload = function(){
+      var data = JSON.parse(this.response)
+      console.log(data)
+    }
+    window.location = "/map.html"
+    request.send()
+  });
+});

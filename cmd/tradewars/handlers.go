@@ -7,51 +7,49 @@ import (
     "log"
     "net/http"
     "strconv"
-    "time"
+    //"time"
     "encoding/json"
     "strings"
   //  "github.com/gorilla/mux"
 )
 
 func playersHandler(w http.ResponseWriter, r *http.Request) {
-    if r.Method == http.MethodGet {
-        ts, err := template.ParseFiles("internal/ui/html/index.html")
-        if err != nil {
-            log.Println(err.Error())
-            http.Error(w, "Internal Server Error", 500)
-            return
-        }
-        err = ts.Execute(w, nil)
-        if err != nil {
-            log.Println(err.Error())
-            http.Error(w, "Internal Server Error", 500)
-        }
-    } else if r.Method == http.MethodPost {
-        err := r.ParseForm()
-        if err != nil {
-            log.Println(err.Error())
-            http.Error(w, "Internal Server Error", 500)
-        }
-        callsign := r.Form.Get("callsign")
-        // validate call sign
-        // either set cookie, redirect to map
-        // or rediret to home, prompt for user creation
-        for i := 0; i < len(jsonShips.Ships); i++ {
-            if callsign == jsonShips.Ships[i].Callsign {
-              // match found
-              cookie := http.Cookie {
-                  Name: "callsign",
-                  Value: callsign,
-                  Expires: time.Now().AddDate(0, 0, 1),
-                  Path: "/",
-              }
-              http.SetCookie(w, &cookie)
-              http.Redirect(w, r, "/map.html?callsign="+callsign, http.StatusSeeOther)
-        }
-      }
-      // match not found
-      http.Redirect(w,r, "/", http.StatusSeeOther)
-}
+    callsign := r.URL.Query().Get("callsign")
+    log.Println(callsign)
+    // if r.Method == http.MethodGet {
+    //     ts, err := template.ParseFiles("internal/ui/html/index.html")
+    //     if err != nil {
+    //         log.Println(err.Error())
+    //         http.Error(w, "Internal Server Error", 500)
+    //         return
+    //     }
+    //     err = ts.Execute(w, nil)
+    //     if err != nil {
+    //         log.Println(err.Error())
+    //         http.Error(w, "Internal Server Error", 500)
+    //     }
+    // } else if r.Method == http.MethodPost {
+    //     err := r.ParseForm()
+    //     if err != nil {
+    //         log.Println(err.Error())
+    //         http.Error(w, "Internal Server Error", 500)
+    //     }
+    //     callsign := r.Form.Get("callsign")
+    //     // validate call sign
+    //     // either set cookie, redirect to map
+    //     // or rediret to home, prompt for user creation
+    //
+    //     cookie := http.Cookie {
+    //         Name: "callsign",
+    //         Value: callsign,
+    //         Expires: time.Now().AddDate(0, 0, 1),
+    //         Path: "/",
+    //     }
+    //     http.SetCookie(w, &cookie)
+    //     http.Redirect(w, r, "/map.html", http.StatusSeeOther)
+    //   }
+    json.NewEncoder(w).Encode("hello world") // return
+  //  http.Redirect(w, r, "/map.html", http.StatusSeeOther)
 }
 
 func spliceAndAdjustLocation(oldLoc []string, direction string) string{
