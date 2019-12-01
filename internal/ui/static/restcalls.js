@@ -40,11 +40,15 @@ $(document).ready(function(){
     var request = new XMLHttpRequest()
     var callsign = $('#callsigninput').val();
     request.open('POST', '/players?callsign='+callsign, true)
-    request.onload = function(){
-      var data = JSON.parse(this.response)
-      console.log(data)
+    request.onload = function(response){
+      console.log(response)
+      console.log(response.currentTarget.status)
+      //var data = JSON.parse(this.response)
+      // check headers:
+      // success: redirect
+    //  window.location = "/map.html"
     }
-    window.location = "/map.html"
+
     request.send()
   });
 });
