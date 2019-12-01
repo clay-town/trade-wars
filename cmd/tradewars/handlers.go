@@ -139,6 +139,7 @@ func createNewUser(w http.ResponseWriter, r *http.Request){
     if r.Method == "GET" {
     }
     if r.Method == "POST" {
+        // need to fix the starting equipment
         var newShip s.Ship
         var cargo []s.Cargo
         newShip.Callsign = r.FormValue("callsign")

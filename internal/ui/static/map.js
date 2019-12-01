@@ -14,10 +14,7 @@ $(document).ready(function(){
       console.log(response.currentTarget.status)
       var status = response.currentTarget.status;
       if (status == 200) { // success
-          //redirect page to map
           window.location = "/map.html";
-          alert("hello world")
-           //initilize map population functions
       } else if (status == 500 ) { //failure
           //insert prompt for user to create a new handle
       }
