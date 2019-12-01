@@ -58,8 +58,6 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
         oldLoc := strings.Split(jsonShips.Ships[i].Location, ":")
         newLoc := spliceAndAdjustLocation(oldLoc, direction)
         jsonShips.Ships[i].Location = newLoc// set new location here
-        log.Println(newLoc)
-
         locArray := []string{}
         locArray = append(locArray, origin)
         locArray = append(locArray, newLoc)
