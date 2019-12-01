@@ -24,9 +24,3 @@ function createNewUser(){
   }
   request.send()
 }
-
-function updateShipLocation() {
-  //make call to api to change ship location
-  // on successfull return update ship in DOM
-
-}
