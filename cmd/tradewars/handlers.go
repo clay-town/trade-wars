@@ -33,15 +33,25 @@ func playersHandler(w http.ResponseWriter, r *http.Request) {
             http.Error(w, "Internal Server Error", 500)
         }
         callsign := r.Form.Get("callsign")
-        cookie := http.Cookie {
-            Name: "callsign",
-            Value: callsign,
-            Expires: time.Now().AddDate(0, 0, 1),
-            Path: "/",
+        // validate call sign
+        // either set cookie, redirect to map
+        // or rediret to home, prompt for user creation
+        for i := 0; i < len(jsonShips.Ships); i++ {
+            if callsign == jsonShips.Ships[i].Callsign {
+              // match found
+              cookie := http.Cookie {
+                  Name: "callsign",
+                  Value: callsign,
+                  Expires: time.Now().AddDate(0, 0, 1),
+                  Path: "/",
+              }
+              http.SetCookie(w, &cookie)
+              http.Redirect(w, r, "/map.html?callsign="+callsign, http.StatusSeeOther)
         }
-        http.SetCookie(w, &cookie)
-        http.Redirect(w, r, "/map.html", http.StatusSeeOther)
-    }
+      }
+      // match not found
+      http.Redirect(w,r, "/", http.StatusSeeOther)
+}
 }
 
 func spliceAndAdjustLocation(oldLoc []string, direction string) string{
