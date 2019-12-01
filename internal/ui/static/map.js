@@ -7,7 +7,6 @@ document.getElementById("tableLocation").innerHTML = html // place grid in DOM
 updateLocalPlayerInformation('clay-town');                // place player information in DOM
 updateLocalSpaceStationInformation();                     // place stations on map
 
-moveShip('clay-town','left')
 
 function moveShip(callsign, direction) {
   // make call to server to update ship location
