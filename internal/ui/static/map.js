@@ -29,7 +29,6 @@ function moveShip(callsign, direction) {
   // Create a function that checks for nearby ships and stations
 
 function updateMap(data, callsign) {
-  tradeButton = "<button id='dynamicTradeButton' type='submit'>Trade</button>"
   newLoc = data[0][1]
   oldLoc = data[0][0]
   stationLoc1 = data[1][1]
@@ -41,12 +40,12 @@ function updateMap(data, callsign) {
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
       //insert station name & trade button into Dom
       document.getElementById("nearby").innerHTML = stationName1;
-      document.getElementById("tradeButton").innerHTML = tradeButton
+      document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton1' type='submit'>Trade</button>"
   } else if (newLoc == stationLoc2) {
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
     //insert station name & trade button into Dom
     document.getElementById("nearby").innerHTML = stationName2;
-    document.getElementById("tradeButton").innerHTML = tradeButton
+    document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton2' type='submit'>Trade</button>"
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
@@ -58,8 +57,11 @@ function updateMap(data, callsign) {
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
   }
   //event listener for trade button click:
-  $("#dynamicTradeButton").click(function(){
+  $("#dynamicTradeButton1").click(function(){
     tradeWithStation(callsign, stationName1)
+    });
+  $("#dynamicTradeButton2").click(function(){
+    tradeWithStation(callsign, stationName2)
     });
 }
 
