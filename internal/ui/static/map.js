@@ -9,6 +9,10 @@ var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
 function tradeWithStation(callsign, designation) {
+  // make call to db
+  //    buy and sell are funtions of the server.
+  //    return player inventory (same return as updateLocalPlayerInformation)
+  // on completion call to updateLocalPlayerCargo
     alert(designation)
 }
 
@@ -119,14 +123,17 @@ function updateLocalPlayerInformation(callsign){
   request.onload = function() {
     var data = JSON.parse(this.response)
     document.getElementById(data.location).innerHTML = shipName1
-    document.getElementById("cubits").innerHTML = data["cubits"]
-    cargo = ""
-    //testCargo = data["cargo"]
-    for (i = 0; i<data["cargos"].length; i++){
-      cargo += data.cargos[i].item + ": " + data.cargos[i].quantitiy + "<br>"
-    }
-    document.getElementById("cargo").innerHTML = cargo
+    updateLocalPlayerItems(callsign, data)
     document.getElementById("currentLocation").innerHTML = "["+data.location+"]"
   }
   request.send()
+}
+
+function updateLocalPlayerItems(callsign, data) {
+  cargo = ""
+  for (i = 0; i<data["cargos"].length; i++){
+    cargo += data.cargos[i].item + ": " + data.cargos[i].quantitiy + "<br>"
+  }
+  document.getElementById("cargo").innerHTML = cargo
+  document.getElementById("cubits").innerHTML = data["cubits"]
 }

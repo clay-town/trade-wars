@@ -10,6 +10,8 @@ import (
   "encoding/json"
   //"github.com/gorilla/mux"
 )
+
+// this would be easier if we first outline reusable and returnable data structures
 var jsonShips s.Ships
 var jsonStations s.Stations
 
