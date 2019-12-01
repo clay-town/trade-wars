@@ -16,6 +16,7 @@ $(document).ready(function(){
       if (status == 200) { // success
           //redirect page to map
           window.location = "/map.html";
+          alert("hello world")
            //initilize map population functions
       } else if (status == 500 ) { //failure
           //insert prompt for user to create a new handle
@@ -25,10 +26,10 @@ $(document).ready(function(){
   });
 });
 
-function insertMap(){
+function insertMap(callsign){
   document.getElementById("tableLocation").innerHTML = html // place grid in DOM
   updateLocalSpaceStationInformation();                     // place stations on map
-  updateLocalPlayerInformation('clay-town');
+  updateLocalPlayerInformation(callsign);
 }
 
 function moveShip(callsign, direction) {
