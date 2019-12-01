@@ -15,6 +15,9 @@ function moveShip(callsign, direction) {
   request.send()
 }
 
+  // some of this needs to be moved out of updateMap
+  // What if a player starts on a station? 
+
 function updateMap(data) {
   newLoc = data[0][1]
   oldLoc = data[0][0]
