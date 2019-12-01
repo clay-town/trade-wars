@@ -26,16 +26,19 @@ function updateMap(data) {
   if (newLoc == stationLoc1) {
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
       //insert station name & trade button into Dom
-      document.getElementById("nearby").innerHTML = stationName1
+      document.getElementById("nearby").innerHTML = stationName1;
+      document.getElementById("tradeButton").innerHTML = "<button onclick='alert()'; type='submit' value='Submit'>Trade</button>"
   } else if (newLoc == stationLoc2) {
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
     //insert station name & trade button into Dom
     document.getElementById("nearby").innerHTML = stationName2
+    document.getElementById("tradeButton").innerHTML = "<button onclick='alert()'; type='submit' value='Submit'>Trade</button>"
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
       document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
       document.getElementById("nearby").innerHTML = "The Great Expanse"
+      document.getElementById("tradeButton").innerHTML = ""
   } else {
     document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
@@ -103,7 +106,7 @@ function updateLocalPlayerInformation(callsign){
       cargo += data.cargos[i].item + ": " + data.cargos[i].quantitiy + "<br>"
     }
     document.getElementById("cargo").innerHTML = cargo
-    document.getElementById("currentLocation").innerHTML = data.location+"]"
+    document.getElementById("currentLocation").innerHTML = "["+data.location+"]"
   }
   request.send()
 }
