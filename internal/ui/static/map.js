@@ -23,16 +23,19 @@ function updateMap(data) {
   stationName1 = data[1][0]
   stationName2 = data[1][2]
   //check to see if station exists first, don't paint over station
-  if (newLoc == stationLoc1 || newLoc == stationLoc2) {
-      // arrived at a station
-      //replace old location with empty space, don't paint ship in new location
+  if (newLoc == stationLoc1) {
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
       //insert station name & trade button into Dom
       document.getElementById("nearby").innerHTML = stationName1
+  } else if (newLoc == stationLoc2) {
+    document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
+    //insert station name & trade button into Dom
+    document.getElementById("nearby").innerHTML = stationName2
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
       document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
+      document.getElementById("nearby").innerHTML = "The Great Expanse"
   } else {
     document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
