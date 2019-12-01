@@ -19,11 +19,14 @@ func createNewUser(w http.ResponseWriter, r *http.Request){
     if r.Method == "POST" {
         // need to fix the starting equipment
         var newShip s.Ship
-        var cargo []s.Cargo
+        var cargo s.Cargo
+        var cargos []s.Cargo
+        cargos = append(cargos, cargo)
+
         newShip.Callsign = r.FormValue("callsign")
         newShip.Location = "4:0"
         newShip.Cubits = 400
-        newShip.Cargos = cargo
+        newShip.Cargos = cargos
         log.Println(newShip)
         jsonShips.Ships = append(jsonShips.Ships, newShip)
         http.Redirect(w, r, "/", http.StatusSeeOther)

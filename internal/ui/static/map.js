@@ -72,6 +72,7 @@ function updateLocalPlayerInformation(callsign){
     document.getElementById(data.location).innerHTML = shipName1
     document.getElementById("cubits").innerHTML = data["cubits"]
     cargo = ""
+    //testCargo = data["cargo"]
     for (i = 0; i<data["cargos"].length; i++){
       cargo += data.cargos[i].item + ": " + data.cargos[i].quantitiy + "<br>"
     }
