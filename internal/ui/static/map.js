@@ -57,6 +57,21 @@ function updateMap(data, callsign) {
     document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
   }
+  //event listener for trade button click:
+  $("#dynamicTradeButton").click(function(){
+    alert("hello world")
+    // var request = new XMLHttpRequest()
+    // //  request.open('POST', '/players?callsign='+callsign, true)
+    // request.onload = function(response){
+    //   var status = response.currentTarget.status;
+    //   if (status == 200) { // success
+    //       window.location = "/map.html";
+    //     } else if (status == 500 ) { //failure
+    //       //insert prompt for user to create a new handle
+    //     }
+    //   }
+    //   request.send()
+    });
 }
 
 // This function listens for the user to click the login button
