@@ -3,15 +3,33 @@ var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
-document.getElementById("tableLocation").innerHTML = html // place grid in DOM
-updateLocalPlayerInformation('clay-town');                // place player information in DOM
-updateLocalSpaceStationInformation();                     // place stations on map
 
-$("form").on('submit', function (e) {
-   userLogin()
-   //stop form submission
-   e.preventDefault();
+// This function listens for the user to click the login button
+$(document).ready(function(){
+  $("#one").click(function(){
+    var request = new XMLHttpRequest()
+    var callsign = $('#callsigninput').val();
+    request.open('POST', '/players?callsign='+callsign, true)
+    request.onload = function(response){
+      console.log(response.currentTarget.status)
+      var status = response.currentTarget.status;
+      if (status == 200) { // success
+          //redirect page to map
+          window.location = "/map.html";
+           //initilize map population functions
+      } else if (status == 500 ) { //failure
+          //insert prompt for user to create a new handle
+      }
+    }
+    request.send()
+  });
 });
+
+function insertMap(){
+  document.getElementById("tableLocation").innerHTML = html // place grid in DOM
+  updateLocalSpaceStationInformation();                     // place stations on map
+  updateLocalPlayerInformation('clay-town');
+}
 
 function moveShip(callsign, direction) {
   var request = new XMLHttpRequest()
