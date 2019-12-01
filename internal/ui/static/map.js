@@ -27,12 +27,12 @@ function updateMap(data) {
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
       //insert station name & trade button into Dom
       document.getElementById("nearby").innerHTML = stationName1;
-      document.getElementById("tradeButton").innerHTML = "<button onclick='alert()'; type='submit' value='Submit'>Trade</button>"
+      document.getElementById("tradeButton").innerHTML = "<button onclick='alert()'; type='submit'>Trade</button>"
   } else if (newLoc == stationLoc2) {
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
     //insert station name & trade button into Dom
-    document.getElementById("nearby").innerHTML = stationName2
-    document.getElementById("tradeButton").innerHTML = "<button onclick='alert()'; type='submit' value='Submit'>Trade</button>"
+    document.getElementById("nearby").innerHTML = stationName2;
+    document.getElementById("tradeButton").innerHTML = "<button onclick='alert()'; type='submit'>Trade</button>"
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
@@ -65,8 +65,8 @@ $(document).ready(function(){
 
 function insertMap(callsign){
   document.getElementById("tableLocation").innerHTML = html // place grid in DOM
-  updateLocalSpaceStationInformation();                     // place stations on map
   updateLocalPlayerInformation(callsign);
+  updateLocalSpaceStationInformation();                     // place stations on map
 }
 
 function newTable() {
