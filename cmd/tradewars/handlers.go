@@ -24,7 +24,7 @@ func returnPlayerInformation(w http.ResponseWriter, r *http.Request) {
 
 func returnStationInformation(w http.ResponseWriter, r *http.Request) {
     // returns information for all of the stations
-    json.NewEncoder(w).Encode(jsonStations)
+    json.NewEncoder(w).Encode(jsonStations.Stations)
 }
 
 func mapHandler(w http.ResponseWriter, r *http.Request) {
