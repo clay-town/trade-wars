@@ -22,7 +22,28 @@ func spliceAndAdjustLocation(oldLoc []string, direction string) string{
     }
     intArr = append(intArr, y)
   }
-  intArr[0]++
+  switch direction {
+  case "up":
+    intArr[1]--
+    if intArr[1] == -1 {
+      intArr[1] = 9
+    }
+  case "down":
+    intArr[1]++
+    if intArr[1] == 10 {
+      intArr[1] = 0
+    }
+  case "left":
+    intArr[0]--
+    if intArr[0] == -1 {
+      intArr[0] = 9
+    }
+  case "right":
+    intArr[0]++
+    if intArr[0] == 10 {
+      intArr[0] = 0
+    }
+  }
   newLoc := strconv.Itoa(intArr[0]) + ":" + strconv.Itoa(intArr[1])
   return newLoc
 }
@@ -35,9 +56,9 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
       if callsign == jsonShips.Ships[i].Callsign {
         oldLoc := strings.Split(jsonShips.Ships[i].Location, ":")
         newLoc := spliceAndAdjustLocation(oldLoc, direction)
-
         jsonShips.Ships[i].Location = newLoc// set new location here
-        log.Println(jsonShips.Ships)
+        log.Println(newLoc)
+        // set response for new ship location
       }
   }
 }
