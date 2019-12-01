@@ -3,6 +3,18 @@ var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
+function moveShip(callsign, direction) {
+  var request = new XMLHttpRequest()
+  request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
+  request.onload = function(){
+    var data = JSON.parse(this.response)
+    //check to see if station exists first, don't paint over station
+    document.getElementById(data[1]).innerHTML = shipName1  //move ship to new location on grid
+    document.getElementById(data[0]).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
+  }
+  request.send()
+}
+
 // This function listens for the user to click the login button
 $(document).ready(function(){
   $("#one").click(function(){
@@ -25,18 +37,6 @@ function insertMap(callsign){
   document.getElementById("tableLocation").innerHTML = html // place grid in DOM
   updateLocalSpaceStationInformation();                     // place stations on map
   updateLocalPlayerInformation(callsign);
-}
-
-function moveShip(callsign, direction) {
-  var request = new XMLHttpRequest()
-  request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
-  request.onload = function(){
-    var data = JSON.parse(this.response)
-    //check to see if station exists first, don't paint over station
-    document.getElementById(data[1]).innerHTML = shipName1  //move ship to new location on grid
-    document.getElementById(data[0]).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
-  }
-  request.send()
 }
 
 function newTable() {
