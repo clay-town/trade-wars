@@ -17,28 +17,29 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
   //Update location of players ship!
   callsign := r.URL.Query().Get("callsign")
   direction := r.URL.Query().Get("dir")
+  //Find correct ship in ships struct 
   for i := 0; i < len(jsonShips.Ships); i++ {
       if callsign == jsonShips.Ships[i].Callsign {
         origin := jsonShips.Ships[i].Location
         oldLoc := strings.Split(jsonShips.Ships[i].Location, ":")
         newLoc := spliceAndAdjustLocation(oldLoc, direction)
-        jsonShips.Ships[i].Location = newLoc// set new location here
-        //jsonStations.Stations[0]
-        //stationArray := []s.Station{}
         stationArray := []string{}
         shipArray := []string{}
         dataArray := [][]string{}
 
+        // set new location
+        jsonShips.Ships[i].Location = newLoc
+        // build array of ship location (old and new)
         shipArray = append(shipArray, origin)
         shipArray = append(shipArray, newLoc)
+        //build array of station information
         for i := 0; i < len(jsonStations.Stations); i++ {
           stationArray = append(stationArray, jsonStations.Stations[i].Designation)
           stationArray = append(stationArray, jsonStations.Stations[i].Location)
         }
+        // prepare data array for encoding
         dataArray = append(dataArray, shipArray)
         dataArray = append(dataArray, stationArray)
-
-        //dataArray = append(dataArray, station)
         json.NewEncoder(w).Encode(dataArray) // return
       }
   }
