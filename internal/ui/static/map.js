@@ -8,8 +8,9 @@ function moveShip(callsign, direction) {
   request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
   request.onload = function(){
     var data = JSON.parse(this.response)
-    console.log(data)
-    updateMap(data[1], data[0])
+    // data is a 2d array. the 0th Element is an array of ship locations [previousLocation, newlocation]
+    //                     the 1st Element is an array of the Station names and locations
+    updateMap(data[0][1],data[0][0])
   }
   request.send()
 }
