@@ -16,7 +16,6 @@ function testRestCall() {
 }
 
 function createNewUser(){
-  alert("create")
   var request = new XMLHttpRequest()
   request.open('POST', '/createNewUser', true)
   request.onload = function() {

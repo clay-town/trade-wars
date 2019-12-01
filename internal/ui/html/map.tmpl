@@ -25,10 +25,10 @@
             <div class="column">
               <table>
                   <tr>
-                    <td></td><td><button onclick="moveShip('clay-town', 'up')" type="submit" value="Submit">/\</button></td>
-                    <td><button onclick="moveShip('clay-town', 'left')" type="submit" value="Submit"><</button></td>
-                    <td><button onclick="moveShip('clay-town', 'right')" type="submit" value="Submit">></button></td>
-                    <td></td><td><button onclick="moveShip('clay-town', 'down')" type="submit" value="Submit">\/</button></td>
+                    <td></td><td><button onclick="moveShip({{.callsign}}, 'up')" type="submit" value="Submit">/\</button></td>
+                    <td><button onclick="moveShip({{.callsign}}, 'left')" type="submit" value="Submit"><</button></td>
+                    <td><button onclick="moveShip({{.callsign}}, 'right')" type="submit" value="Submit">></button></td>
+                    <td></td><td><button onclick="moveShip({{.callsign}}, 'down')" type="submit" value="Submit">\/</button></td>
                   </tr>
                 </table>
                 <h3 style="width: 100%;  background-image: radial-gradient(rgb(11, 48, 42), rgb(12, 100, 91), rgb(14, 116, 105));">
