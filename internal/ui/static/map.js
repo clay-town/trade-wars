@@ -8,11 +8,16 @@ function moveShip(callsign, direction) {
   request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
   request.onload = function(){
     var data = JSON.parse(this.response)
-    //check to see if station exists first, don't paint over station
-    document.getElementById(data[1]).innerHTML = shipName1  //move ship to new location on grid
-    document.getElementById(data[0]).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
+    updateMap(data[1], data[0])
   }
   request.send()
+}
+
+function updateMap(newLoc, oldLoc) {
+  //check to see if station exists first, don't paint over station
+  document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
+  document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
+
 }
 
 // This function listens for the user to click the login button

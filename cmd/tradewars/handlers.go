@@ -13,6 +13,24 @@ import (
   //  "github.com/gorilla/mux"
 )
 
+func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
+  //Update location of players ship!
+  callsign := r.URL.Query().Get("callsign")
+  direction := r.URL.Query().Get("dir")
+  for i := 0; i < len(jsonShips.Ships); i++ {
+      if callsign == jsonShips.Ships[i].Callsign {
+        origin := jsonShips.Ships[i].Location
+        oldLoc := strings.Split(jsonShips.Ships[i].Location, ":")
+        newLoc := spliceAndAdjustLocation(oldLoc, direction)
+        jsonShips.Ships[i].Location = newLoc// set new location here
+        locArray := []string{}
+        locArray = append(locArray, origin)
+        locArray = append(locArray, newLoc)
+        json.NewEncoder(w).Encode(locArray) // return
+      }
+  }
+}
+
 func createNewUser(w http.ResponseWriter, r *http.Request){
     if r.Method == "GET" {
     }
@@ -87,24 +105,6 @@ func spliceAndAdjustLocation(oldLoc []string, direction string) string{
   }
   newLoc := strconv.Itoa(intArr[0]) + ":" + strconv.Itoa(intArr[1])
   return newLoc
-}
-
-func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
-  //Update location of players ship!
-  callsign := r.URL.Query().Get("callsign")
-  direction := r.URL.Query().Get("dir")
-  for i := 0; i < len(jsonShips.Ships); i++ {
-      if callsign == jsonShips.Ships[i].Callsign {
-        origin := jsonShips.Ships[i].Location
-        oldLoc := strings.Split(jsonShips.Ships[i].Location, ":")
-        newLoc := spliceAndAdjustLocation(oldLoc, direction)
-        jsonShips.Ships[i].Location = newLoc// set new location here
-        locArray := []string{}
-        locArray = append(locArray, origin)
-        locArray = append(locArray, newLoc)
-        json.NewEncoder(w).Encode(locArray) // return
-      }
-  }
 }
 
 func returnPlayerInformation(w http.ResponseWriter, r *http.Request) {
