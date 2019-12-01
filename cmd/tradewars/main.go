@@ -27,7 +27,7 @@ func main() {
 	mux.HandleFunc("/chat.html", chatHandler)
   mux.HandleFunc("/createNewUser", createNewUser)
   mux.HandleFunc("/stationInformation", returnStationInformation)
-  mux.HandleFunc("/playerInformation/", returnPlayerInformation)
+  mux.HandleFunc("/playerInformation", returnPlayerInformation)
   mux.Handle("/static/", http.StripPrefix("/static", fs))
 	godotenv.Load()
 	log.Println("Starting server on " + os.Getenv("PORT"))

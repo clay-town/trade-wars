@@ -12,9 +12,27 @@ for (var y = 0; y < 10; y++) {
         html+="<td"+' id=x'+x+'y'+y+">"+td+"</td>";
     }
 }
+updateLocalPlayerInformation('clay-town');
 document.getElementById("tableLocation").innerHTML = html
-//document.getElementById(stationLocation).innerHTML = stationName1
-//document.getElementById(shipLocation).innerHTML = shipName1
 
+function updateLocalPlayerInformation(callsign){
+  var request = new XMLHttpRequest()
+  request.open('POST', '/playerInformation?callsign='+callsign)
+  request.onload = function() {
+    var data = JSON.parse(this.response)
+    console.log(data.location)
+    document.getElementById(data.location).innerHTML = shipName1
+    //populate cargo and bucks divs here 
+  }
+  request.send()
+}
 
-//make call to db to retrieve ship information
+//make call to db to retrieve map information from server
+function retrieveStationLocations(){
+  var request = new XMLHttpRequest()
+  request.open('POST', '/stationInformation', true)
+  request.onload = function() {
+
+  }
+  request.send()
+}
