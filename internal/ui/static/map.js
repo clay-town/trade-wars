@@ -3,7 +3,6 @@ var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
-
 // This function listens for the user to click the login button
 $(document).ready(function(){
   $("#one").click(function(){
