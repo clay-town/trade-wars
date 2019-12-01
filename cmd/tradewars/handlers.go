@@ -13,6 +13,37 @@ import (
   //  "github.com/gorilla/mux"
 )
 
+func playersHandler(w http.ResponseWriter, r *http.Request) {
+    if r.Method == http.MethodGet {
+        ts, err := template.ParseFiles("internal/ui/html/index.html")
+        if err != nil {
+            log.Println(err.Error())
+            http.Error(w, "Internal Server Error", 500)
+            return
+        }
+        err = ts.Execute(w, nil)
+        if err != nil {
+            log.Println(err.Error())
+            http.Error(w, "Internal Server Error", 500)
+        }
+    } else if r.Method == http.MethodPost {
+        err := r.ParseForm()
+        if err != nil {
+            log.Println(err.Error())
+            http.Error(w, "Internal Server Error", 500)
+        }
+        callsign := r.Form.Get("callsign")
+        cookie := http.Cookie {
+            Name: "callsign",
+            Value: callsign,
+            Expires: time.Now().AddDate(0, 0, 1),
+            Path: "/",
+        }
+        http.SetCookie(w, &cookie)
+        http.Redirect(w, r, "/map.html", http.StatusSeeOther)
+    }
+}
+
 func spliceAndAdjustLocation(oldLoc []string, direction string) string{
   intArr := []int{}
   for _, x := range oldLoc {  // convert string array into int array
@@ -127,37 +158,6 @@ func createNewUser(w http.ResponseWriter, r *http.Request){
         log.Println(newShip)
         jsonShips.Ships = append(jsonShips.Ships, newShip)
         http.Redirect(w, r, "/", http.StatusSeeOther)
-    }
-}
-
-func playersHandler(w http.ResponseWriter, r *http.Request) {
-    if r.Method == http.MethodGet {
-        ts, err := template.ParseFiles("internal/ui/html/index.html")
-        if err != nil {
-            log.Println(err.Error())
-            http.Error(w, "Internal Server Error", 500)
-            return
-        }
-        err = ts.Execute(w, nil)
-        if err != nil {
-            log.Println(err.Error())
-            http.Error(w, "Internal Server Error", 500)
-        }
-    } else if r.Method == http.MethodPost {
-        err := r.ParseForm()
-        if err != nil {
-            log.Println(err.Error())
-            http.Error(w, "Internal Server Error", 500)
-        }
-        callsign := r.Form.Get("callsign")
-        cookie := http.Cookie {
-            Name: "callsign",
-            Value: callsign,
-            Expires: time.Now().AddDate(0, 0, 1),
-            Path: "/",
-        }
-        http.SetCookie(w, &cookie)
-        http.Redirect(w, r, "/map.html", http.StatusSeeOther)
     }
 }
 
