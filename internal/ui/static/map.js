@@ -49,9 +49,11 @@ function updateLocalPlayerInformation(callsign){
   request.open('POST', '/playerInformation?callsign='+callsign)
   request.onload = function() {
     var data = JSON.parse(this.response)
+    console.log(data)
     document.getElementById(data.location).innerHTML = shipName1
+    console.log(data)
     document.getElementById("bucks").innerHTML = "Bucks: 1 mil"
-    document.getElementById("cargo").innerHTML = "Dog treats: 12 <br> Concert Tickets: 2 <br> Fuel: 3" 
+    document.getElementById("cargo").innerHTML = "Dog treats: 12 <br> Concert Tickets: 2 <br> Fuel: 3"
     //populate cargo and bucks divs here
   }
   request.send()

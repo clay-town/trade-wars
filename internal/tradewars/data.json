@@ -3,7 +3,7 @@
         {
          "callsign": "aluminum-raccoon",
          "location": "4:8",
-         "cargo": [
+         "cargos": [
             {
               "item": "Luis CK DVD",
               "quantitiy": "1"
@@ -12,12 +12,12 @@
               "item": "Pokemon Cards",
               "quantitiy":"42"
             }
-          ],
+          ]
         },
         {
          "callsign": "clay-town",
          "location": "2:9",
-         "cargo": [
+         "cargos": [
             {
               "item": "Wool Socks",
               "quantitiy": "8"
@@ -26,7 +26,7 @@
               "item": "Tomatoes",
               "quantitiy":"98"
             }
-          ],
+          ]
         }
     ],
     "stations": [
