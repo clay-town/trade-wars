@@ -18,9 +18,9 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
   direction := r.URL.Query().Get("dir")
   for i := 0; i < len(jsonShips.Ships); i++ {
       if callsign == jsonShips.Ships[i].Callsign {
-        oldLoc := jsonShips.Ships[i].Location
-        log.Println(oldLoc)
-        jsonShips.Ships[i].Location = direction
+  //      oldLoc := jsonShips.Ships[i].Location
+
+        jsonShips.Ships[i].Location = direction// set new location here
         log.Println(jsonShips.Ships)
       }
   }

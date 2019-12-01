@@ -27,7 +27,7 @@ function newTable() {
   for (var y = 0; y < 10; y++) { // build HTML table for grid map
       html+="<tr>";
       for (var x = 0; x < 10; x++) {
-          html+="<td"+' id=x'+x+'y'+y+">"+td+"</td>";
+          html+="<td"+' id='+x+':'+y+">"+td+"</td>";
       }
   }
   return html
