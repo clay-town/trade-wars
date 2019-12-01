@@ -3,9 +3,6 @@ var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
-function promptUserToTradeWithStation(){
-}
-
 function moveShip(callsign, direction) {
   var request = new XMLHttpRequest()
   request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
@@ -28,7 +25,6 @@ function updateMap(data) {
       // arrived at a station
       //replace old location with empty space, don't paint ship in new location
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
-      promptUserToTradeWithStation()
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
@@ -100,8 +96,7 @@ function updateLocalPlayerInformation(callsign){
       cargo += data.cargos[i].item + ": " + data.cargos[i].quantitiy + "<br>"
     }
     document.getElementById("cargo").innerHTML = cargo
-    //"Dog treats: 12 <br> Concert Tickets: 2 <br> Fuel: 3"
-    //populate cargo and bucks divs here
+    document.getElementById("currentLocation").innerHTML = data.location+"]"
   }
   request.send()
 }
