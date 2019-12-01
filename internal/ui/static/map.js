@@ -18,10 +18,19 @@ function moveShip(callsign, direction) {
 function updateMap(data) {
   newLoc = data[0][1]
   oldLoc = data[0][0]
+  stationLoc1 = data[1][1]
+  stationLoc2 = data[1][3]
   //check to see if station exists first, don't paint over station
-  document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
-  document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
-
+  if (newLoc == stationLoc1 || newLoc == stationLoc2) {
+      //replace old location with empty space, don't paint ship in new location
+      document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
+  } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
+      //paint ship in new location, don't paint over old location
+      document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
+  } else {
+    document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
+    document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
+  }
 }
 
 // This function listens for the user to click the login button
