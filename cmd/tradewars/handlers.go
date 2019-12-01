@@ -119,8 +119,12 @@ func createNewUser(w http.ResponseWriter, r *http.Request){
     }
     if r.Method == "POST" {
         var newShip s.Ship
+        var cargo []s.Cargo
         newShip.Callsign = r.FormValue("callsign")
-        newShip.Location = "x3y5"
+        newShip.Location = "4:0"
+        newShip.Cubits = 400
+        newShip.Cargos = cargo
+        log.Println(newShip)
         jsonShips.Ships = append(jsonShips.Ships, newShip)
         http.Redirect(w, r, "/", http.StatusSeeOther)
     }
@@ -180,7 +184,7 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
     }
-    log.Println(jsonStations)
+    log.Println(jsonShips)
 }
 
 func tradeHandler(w http.ResponseWriter, r *http.Request) {
