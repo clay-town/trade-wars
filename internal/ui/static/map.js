@@ -7,15 +7,12 @@ document.getElementById("tableLocation").innerHTML = html // place grid in DOM
 updateLocalPlayerInformation('clay-town');                // place player information in DOM
 updateLocalSpaceStationInformation();                     // place stations on map
 
-
 function moveShip(callsign, direction) {
-  // make call to server to update ship location
-  // replace current location with empty image
-  // repaint ship location on map
   var request = new XMLHttpRequest()
   request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
   request.onload = function(){
     var data = JSON.parse(this.response)
+    //check to see if station exists first, don't paint over station
     document.getElementById(data[1]).innerHTML = shipName1  //move ship to new location on grid
     document.getElementById(data[0]).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
     console.log(data)
