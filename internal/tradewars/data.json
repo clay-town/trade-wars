@@ -3,6 +3,7 @@
         {
          "callsign": "aluminum-raccoon",
          "location": "4:8",
+         "cubits": 148,
          "cargos": [
             {
               "item": "Luis CK DVD",
@@ -17,6 +18,7 @@
         {
          "callsign": "clay-town",
          "location": "2:9",
+         "cubits": 20,
          "cargos": [
             {
               "item": "Wool Socks",
