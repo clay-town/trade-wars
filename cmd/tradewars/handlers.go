@@ -15,7 +15,7 @@ import (
 
 func spliceAndAdjustLocation(oldLoc []string, direction string) string{
   intArr := []int{}
-  for _, x := range oldLoc {  // convert string int int array
+  for _, x := range oldLoc {  // convert string array into int array
     y, err := strconv.Atoi(x)
     if err != nil{
       panic(err)
@@ -54,11 +54,16 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
   direction := r.URL.Query().Get("dir")
   for i := 0; i < len(jsonShips.Ships); i++ {
       if callsign == jsonShips.Ships[i].Callsign {
+        origin := jsonShips.Ships[i].Location
         oldLoc := strings.Split(jsonShips.Ships[i].Location, ":")
         newLoc := spliceAndAdjustLocation(oldLoc, direction)
         jsonShips.Ships[i].Location = newLoc// set new location here
         log.Println(newLoc)
-        // set response for new ship location
+
+        locArray := []string{}
+        locArray = append(locArray, origin)
+        locArray = append(locArray, newLoc)
+        json.NewEncoder(w).Encode(locArray) // return
       }
   }
 }
