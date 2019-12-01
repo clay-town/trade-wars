@@ -9,8 +9,23 @@ import (
     "strconv"
     "time"
     "encoding/json"
+    "strings"
   //  "github.com/gorilla/mux"
 )
+
+func spliceAndAdjustLocation(oldLoc []string, direction string) string{
+  intArr := []int{}
+  for _, x := range oldLoc {  // convert string int int array
+    y, err := strconv.Atoi(x)
+    if err != nil{
+      panic(err)
+    }
+    intArr = append(intArr, y)
+  }
+  intArr[0]++
+  newLoc := strconv.Itoa(intArr[0]) + ":" + strconv.Itoa(intArr[1])
+  return newLoc
+}
 
 func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
   //Update location of players ship!
@@ -18,9 +33,10 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
   direction := r.URL.Query().Get("dir")
   for i := 0; i < len(jsonShips.Ships); i++ {
       if callsign == jsonShips.Ships[i].Callsign {
-  //      oldLoc := jsonShips.Ships[i].Location
+        oldLoc := strings.Split(jsonShips.Ships[i].Location, ":")
+        newLoc := spliceAndAdjustLocation(oldLoc, direction)
 
-        jsonShips.Ships[i].Location = direction// set new location here
+        jsonShips.Ships[i].Location = newLoc// set new location here
         log.Println(jsonShips.Ships)
       }
   }
