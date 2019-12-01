@@ -8,6 +8,7 @@ function moveShip(callsign, direction) {
   request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
   request.onload = function(){
     var data = JSON.parse(this.response)
+    console.log(data)
     updateMap(data[1], data[0])
   }
   request.send()

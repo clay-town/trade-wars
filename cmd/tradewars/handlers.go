@@ -23,9 +23,21 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
         oldLoc := strings.Split(jsonShips.Ships[i].Location, ":")
         newLoc := spliceAndAdjustLocation(oldLoc, direction)
         jsonShips.Ships[i].Location = newLoc// set new location here
-        dataArray := []string{}
-        dataArray = append(dataArray, origin)
-        dataArray = append(dataArray, newLoc)
+        //jsonStations.Stations[0]
+        //stationArray := []s.Station{}
+        stationArray := []string{}
+        shipArray := []string{}
+        dataArray := [][]string{}
+
+        shipArray = append(shipArray, origin)
+        shipArray = append(shipArray, newLoc)
+        stationArray = append(stationArray, jsonStations.Stations[0].Designation)
+        stationArray = append(stationArray, jsonStations.Stations[0].Location)
+
+        dataArray = append(dataArray, shipArray)
+        dataArray = append(dataArray, stationArray)
+
+        //dataArray = append(dataArray, station)
         json.NewEncoder(w).Encode(dataArray) // return
       }
   }
@@ -39,8 +51,8 @@ func createNewUser(w http.ResponseWriter, r *http.Request){
         var newShip s.Ship
         var cargo s.Cargo
         var cargos []s.Cargo
-        cargos = append(cargos, cargo)
 
+        cargos = append(cargos, cargo)
         newShip.Callsign = r.FormValue("callsign")
         newShip.Location = "4:0"
         newShip.Cubits = 400
