@@ -13,6 +13,23 @@ import (
   //  "github.com/gorilla/mux"
 )
 
+func createNewUser(w http.ResponseWriter, r *http.Request){
+    if r.Method == "GET" {
+    }
+    if r.Method == "POST" {
+        // need to fix the starting equipment
+        var newShip s.Ship
+        var cargo []s.Cargo
+        newShip.Callsign = r.FormValue("callsign")
+        newShip.Location = "4:0"
+        newShip.Cubits = 400
+        newShip.Cargos = cargo
+        log.Println(newShip)
+        jsonShips.Ships = append(jsonShips.Ships, newShip)
+        http.Redirect(w, r, "/", http.StatusSeeOther)
+    }
+}
+
 func playersHandler(w http.ResponseWriter, r *http.Request) {
     callsign := r.URL.Query().Get("callsign")
     log.Println(callsign)
@@ -132,23 +149,6 @@ func mapHandler(w http.ResponseWriter, r *http.Request) {
     if err != nil {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
-    }
-}
-
-func createNewUser(w http.ResponseWriter, r *http.Request){
-    if r.Method == "GET" {
-    }
-    if r.Method == "POST" {
-        // need to fix the starting equipment
-        var newShip s.Ship
-        var cargo []s.Cargo
-        newShip.Callsign = r.FormValue("callsign")
-        newShip.Location = "4:0"
-        newShip.Cubits = 400
-        newShip.Cargos = cargo
-        log.Println(newShip)
-        jsonShips.Ships = append(jsonShips.Ships, newShip)
-        http.Redirect(w, r, "/", http.StatusSeeOther)
     }
 }
 
