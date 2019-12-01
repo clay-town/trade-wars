@@ -12,6 +12,20 @@ import (
   //  "github.com/gorilla/mux"
 )
 
+func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
+  //Update location of players ship!
+  callsign := r.URL.Query().Get("callsign")
+  direction := r.URL.Query().Get("dir")
+  for i := 0; i < len(jsonShips.Ships); i++ {
+      if callsign == jsonShips.Ships[i].Callsign {
+        oldLoc := jsonShips.Ships[i].Location
+        log.Println(oldLoc)
+        jsonShips.Ships[i].Location = direction
+        log.Println(jsonShips.Ships)
+      }
+  }
+}
+
 func returnPlayerInformation(w http.ResponseWriter, r *http.Request) {
   // returns information for ship matching the users callsign
   callsign := r.URL.Query().Get("callsign")
@@ -58,8 +72,6 @@ func mapHandler(w http.ResponseWriter, r *http.Request) {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
     }
-    //tablecell.Set("innerHTML", "Ship")
-    //putShipOnMap()
 }
 
 func createNewUser(w http.ResponseWriter, r *http.Request){
