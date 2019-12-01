@@ -3,6 +3,9 @@ var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
+function promptUserToTradeWithStation(){
+}
+
 function moveShip(callsign, direction) {
   var request = new XMLHttpRequest()
   request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
@@ -22,9 +25,12 @@ function updateMap(data) {
   stationLoc2 = data[1][3]
   //check to see if station exists first, don't paint over station
   if (newLoc == stationLoc1 || newLoc == stationLoc2) {
+      // arrived at a station
       //replace old location with empty space, don't paint ship in new location
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
+      promptUserToTradeWithStation()
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
+      // leaving a station
       //paint ship in new location, don't paint over old location
       document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
   } else {

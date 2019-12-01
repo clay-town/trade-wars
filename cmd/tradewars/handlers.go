@@ -17,7 +17,7 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
   //Update location of players ship!
   callsign := r.URL.Query().Get("callsign")
   direction := r.URL.Query().Get("dir")
-  //Find correct ship in ships struct 
+  //Find correct ship in ships struct
   for i := 0; i < len(jsonShips.Ships); i++ {
       if callsign == jsonShips.Ships[i].Callsign {
         origin := jsonShips.Ships[i].Location
@@ -192,7 +192,6 @@ func homeHandler(w http.ResponseWriter, r *http.Request) {
         log.Println(err.Error())
         http.Error(w, "Internal Server Error", 500)
     }
-    log.Println(jsonShips)
 }
 
 func tradeHandler(w http.ResponseWriter, r *http.Request) {
