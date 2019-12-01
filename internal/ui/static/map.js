@@ -11,7 +11,6 @@ $(document).ready(function(){
     var callsign = $('#callsigninput').val();
     request.open('POST', '/players?callsign='+callsign, true)
     request.onload = function(response){
-      console.log(response.currentTarget.status)
       var status = response.currentTarget.status;
       if (status == 200) { // success
           window.location = "/map.html";
@@ -37,7 +36,6 @@ function moveShip(callsign, direction) {
     //check to see if station exists first, don't paint over station
     document.getElementById(data[1]).innerHTML = shipName1  //move ship to new location on grid
     document.getElementById(data[0]).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
-    console.log(data)
   }
   request.send()
 }
