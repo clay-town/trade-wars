@@ -9,7 +9,7 @@ var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
 function tradeWithStation(callsign, designation) {
-
+    alert(designation)
 }
 
 function moveShip(callsign, direction) {
@@ -59,18 +59,7 @@ function updateMap(data, callsign) {
   }
   //event listener for trade button click:
   $("#dynamicTradeButton").click(function(){
-    alert("hello world")
-    // var request = new XMLHttpRequest()
-    // //  request.open('POST', '/players?callsign='+callsign, true)
-    // request.onload = function(response){
-    //   var status = response.currentTarget.status;
-    //   if (status == 200) { // success
-    //       window.location = "/map.html";
-    //     } else if (status == 500 ) { //failure
-    //       //insert prompt for user to create a new handle
-    //     }
-    //   }
-    //   request.send()
+    tradeWithStation(callsign, stationName1)
     });
 }
 
