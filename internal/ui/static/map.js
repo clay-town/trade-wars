@@ -13,6 +13,7 @@ function moveShip(callsign, direction) {
     updateMap(data)
   }
   request.send()
+  checkNearby()
 }
 
 function updateMap(data) {
@@ -25,6 +26,8 @@ function updateMap(data) {
       // arrived at a station
       //replace old location with empty space, don't paint ship in new location
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
+      //insert station name & trade button into Dom
+      document.getElementById
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
