@@ -31,9 +31,10 @@ func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
 
         shipArray = append(shipArray, origin)
         shipArray = append(shipArray, newLoc)
-        stationArray = append(stationArray, jsonStations.Stations[0].Designation)
-        stationArray = append(stationArray, jsonStations.Stations[0].Location)
-
+        for i := 0; i < len(jsonStations.Stations); i++ {
+          stationArray = append(stationArray, jsonStations.Stations[i].Designation)
+          stationArray = append(stationArray, jsonStations.Stations[i].Location)
+        }
         dataArray = append(dataArray, shipArray)
         dataArray = append(dataArray, stationArray)
 
