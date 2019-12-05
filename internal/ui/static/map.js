@@ -8,6 +8,18 @@ var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
+function checkNearby(data, callsign) {
+  var request = new XMLHttpRequest()
+  request.open('POST', '/updatePlayerLocation', true)
+  request.onload = function(){
+    var data = JSON.parse(this.response)
+    // data is a 2d array. the 0th Element :[previousLocation, newlocation]
+    //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
+    console.log(data)
+  }
+  request.send()
+}
+
 function tradeWithStation(callsign, designation) {
   // make call to db
   //    buy and sell are funtions of the server.
@@ -25,6 +37,7 @@ function moveShip(callsign, direction) {
     //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
     updateMap(data, callsign)
     updateLocalPlayerCoords(data)
+    checkNearby(data, callsign)
   }
   request.send()
 }

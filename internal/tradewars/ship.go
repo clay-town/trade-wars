@@ -5,4 +5,6 @@ type Ship struct {
     Location string `json:"location"`
     Cargos []Cargo `json:"cargos"`
     Cubits int `json:"cubits"`
+    Cubits string `json:"online"`
+
 }
