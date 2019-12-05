@@ -33,8 +33,8 @@ function checkNearby(data, callsign, currentLocation) {
       if (currentLocation == data[0][x+1] && callsign != data[0][x]) { //At the same coords as another player
         player2 = data[0][x]
         console.log("check nearby current location: " + currentLocation)
-        document.getElementById("nearby").innerHTML = data[0][x]
-        document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton3' type='submit'>Trade</button>"
+        document.getElementById("nearby").innerHTML = data[0][x] + "&emsp;"
+        document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton3' type='submit' style='height: 50px; width: 150px; font-size: 35px'>Trade</button>"
         $("#dynamicTradeButton3").click(function(){
           tradeWithPlayer(callsign, player2)
           });
