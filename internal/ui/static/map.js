@@ -10,12 +10,12 @@ var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
 function checkNearby(data, callsign) {
   var request = new XMLHttpRequest()
-  request.open('POST', '/updatePlayerLocation', true)
+  request.open('POST', '/nearby', true)
   request.onload = function(){
     var data = JSON.parse(this.response)
     // data is a 2d array. the 0th Element :[previousLocation, newlocation]
     //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
-    console.log(data)
+    console.log(this.response)
   }
   request.send()
 }

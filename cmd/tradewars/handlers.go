@@ -18,9 +18,9 @@ func nearbyHandler(w http.ResponseWriter, r *http.Request) {
   shipArray := []string{}
   dataArray := [][]string{}
 
-  for i := 0; i < len(jsonStations.Ships); i++ {
-    shipArray = append(shipArray, jsonStations.Ships[i].Callsign)
-    shipArray = append(shipArray, jsonStations.Ships[i].Location)
+  for i := 0; i < len(jsonShips.Ships); i++ {
+    shipArray = append(shipArray, jsonShips.Ships[i].Callsign)
+    shipArray = append(shipArray, jsonShips.Ships[i].Location)
   }
   for i := 0; i < len(jsonStations.Stations); i++ {
     stationArray = append(stationArray, jsonStations.Stations[i].Designation)
@@ -28,6 +28,7 @@ func nearbyHandler(w http.ResponseWriter, r *http.Request) {
   }
   dataArray = append(dataArray, shipArray)
   dataArray = append(dataArray, stationArray)
+  log.Println(dataArray)
   json.NewEncoder(w).Encode(dataArray) // return
 }
 
