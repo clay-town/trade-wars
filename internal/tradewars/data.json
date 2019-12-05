@@ -37,7 +37,7 @@
         {
          "designation": "Alpha Centauri",
          "location": "2:4",
-         "inventory": [
+         "cargos": [
             {
               "item": "Reuseable Travel Mugs",
               "quantitiy": "20",
@@ -53,7 +53,7 @@
         {
          "designation": "Luna",
          "location": "8:3",
-         "inventory": [
+         "cargos": [
             {
               "item": "Warm Hats",
               "quantitiy": "4",
