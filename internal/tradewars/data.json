@@ -36,11 +36,35 @@
     "stations": [
         {
          "designation": "Alpha Centauri",
-         "location": "2:4"
+         "location": "2:4",
+         "inventory": [
+            {
+              "item": "Reuseable Travel Mugs",
+              "quantitiy": "20",
+              "unitcost": 4
+            },
+            {
+              "item": "Peanut Butter",
+              "quantitiy":"67",
+              "unitcost": 2
+            }
+          ]
         },
         {
          "designation": "Luna",
-         "location": "8:3"
+         "location": "8:3",
+         "inventory": [
+            {
+              "item": "Warm Hats",
+              "quantitiy": "4",
+              "unitcost": 8
+            },
+            {
+              "item": "AOL Trial CD's",
+              "quantitiy":"71",
+              "unitcost": 2
+            }
+          ]
         }
     ]
 }
