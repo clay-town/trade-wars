@@ -89,7 +89,7 @@ function updateMap(data, callsign) {
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
     //insert station name & trade button into Dom
     document.getElementById("nearby").innerHTML = stationName2 + "&emsp;";
-    document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton2' type='submit' style='font-size: 5px'>Trade</button>"
+    document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton2' type='submit' style='height: 50px; width: 150px; font-size: 35px'>Trade</button>"
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
