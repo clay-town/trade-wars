@@ -8,6 +8,19 @@ var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
+function updateOnlineStatus(callsign, online='yes') {
+  // set listeners for window.close , to call this function on logout
+  var request = new XMLHttpRequest()
+  request.open('POST', '/updateonline?callsign='+callsign+'&online='+online, true)
+  request.onload = function(){
+    var data = JSON.parse(this.response)
+    // data is a 2d array. the 0th Element :[previousLocation, newlocation]
+    //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
+    console.log(this.response)
+  }
+  request.send()
+}
+
 function checkNearby(data, callsign) {
   var request = new XMLHttpRequest()
   request.open('POST', '/nearby', true)
@@ -103,6 +116,7 @@ $(document).ready(function(){
 
 function insertMap(callsign){
   document.getElementById("tableLocation").innerHTML = html // place grid in DOM
+  updateOnlineStatus(callsign);
   updateLocalPlayerInformation(callsign);
   updateLocalSpaceStationInformation();                     // place stations on map
 }

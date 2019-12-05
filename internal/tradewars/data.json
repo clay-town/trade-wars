@@ -2,7 +2,7 @@
     "ships": [
         {
          "callsign": "aluminum-raccoon",
-         "online":"no",
+         "online":"yes",
          "location": "4:8",
          "cubits": 148,
          "cargos": [

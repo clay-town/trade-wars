@@ -13,14 +13,26 @@ import (
   //  "github.com/gorilla/mux"
 )
 
+func updateOnlineHandler(w http.ResponseWriter, r *http.Request) {
+  callsign := r.URL.Query().Get("callsign")
+  online := r.URL.Query().Get("online")
+  for i := 0; i < len(jsonShips.Ships); i++ {
+    if callsign == jsonShips.Ships[i].Callsign {
+      jsonShips.Ships[i].Online = online
+    }
+  }
+}
+
 func nearbyHandler(w http.ResponseWriter, r *http.Request) {
   stationArray := []string{}
   shipArray := []string{}
   dataArray := [][]string{}
 
   for i := 0; i < len(jsonShips.Ships); i++ {
-    shipArray = append(shipArray, jsonShips.Ships[i].Callsign)
-    shipArray = append(shipArray, jsonShips.Ships[i].Location)
+    if jsonShips.Ships[i].Online == "yes"{
+      shipArray = append(shipArray, jsonShips.Ships[i].Callsign)
+      shipArray = append(shipArray, jsonShips.Ships[i].Location)
+    }
   }
   for i := 0; i < len(jsonStations.Stations); i++ {
     stationArray = append(stationArray, jsonStations.Stations[i].Designation)

@@ -32,6 +32,8 @@ func main() {
   mux.HandleFunc("/playerInformation", returnPlayerInformation)
   mux.HandleFunc("/updatePlayerLocation", updatePlayerLocation)
   mux.HandleFunc("/nearby", nearbyHandler)
+  mux.HandleFunc("/updateonline", updateOnlineHandler)
+
 
 
   mux.Handle("/static/", http.StripPrefix("/static", fs))
