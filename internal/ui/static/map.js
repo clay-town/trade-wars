@@ -23,8 +23,8 @@ function moveShip(callsign, direction) {
     var data = JSON.parse(this.response)
     // data is a 2d array. the 0th Element :[previousLocation, newlocation]
     //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
-    updateLocalPlayerInformation(callsign)
     updateMap(data, callsign)
+    updateLocalPlayerCoords(data)
   }
   request.send()
 }
@@ -124,14 +124,8 @@ function updateLocalPlayerInformation(callsign){
   request.onload = function() {
     var data = JSON.parse(this.response)
     document.getElementById(data.location).innerHTML = shipName1
-    updateLocalPlayerItems(callsign, data)
     document.getElementById("currentLocation").innerHTML = "["+data.location+"]"
-    if (data.location == stationLoc1) {
-      document.getElementById(data.location).innerHTML = "<img src='../static/img/spaceStation.jpg'>"
-      //insert station name & trade button into Dom
-      document.getElementById("nearby").innerHTML = stationName1;
-      document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton1' type='submit'>Trade</button>"
-    }
+    updateLocalPlayerItems(callsign, data)
   }
   request.send()
 }
@@ -143,4 +137,8 @@ function updateLocalPlayerItems(callsign, data) {
   }
   document.getElementById("cargo").innerHTML = cargo
   document.getElementById("cubits").innerHTML = data["cubits"]
+}
+
+function updateLocalPlayerCoords(data){
+  document.getElementById("currentLocation").innerHTML = "["+data[0][1]+"]"
 }
