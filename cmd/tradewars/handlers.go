@@ -13,6 +13,24 @@ import (
   //  "github.com/gorilla/mux"
 )
 
+func nearbyHandler(w http.ResponseWriter, r *http.Request) {
+  stationArray := []string{}
+  shipArray := []string{}
+  dataArray := [][]string{}
+
+  for i := 0; i < len(jsonStations.Ships); i++ {
+    shipArray = append(shipArray, jsonStations.Ships[i].Callsign)
+    shipArray = append(shipArray, jsonStations.Ships[i].Location)
+  }
+  for i := 0; i < len(jsonStations.Stations); i++ {
+    stationArray = append(stationArray, jsonStations.Stations[i].Designation)
+    stationArray = append(stationArray, jsonStations.Stations[i].Location)
+  }
+  dataArray = append(dataArray, shipArray)
+  dataArray = append(dataArray, stationArray)
+  json.NewEncoder(w).Encode(dataArray) // return
+}
+
 func updatePlayerLocation(w http.ResponseWriter, r *http.Request) {
   //Update location of players ship!
   callsign := r.URL.Query().Get("callsign")

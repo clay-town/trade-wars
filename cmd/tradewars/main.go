@@ -31,6 +31,8 @@ func main() {
   mux.HandleFunc("/stationInformation", returnStationInformation)
   mux.HandleFunc("/playerInformation", returnPlayerInformation)
   mux.HandleFunc("/updatePlayerLocation", updatePlayerLocation)
+  mux.HandleFunc("/nearby", nearbyHandler)
+
 
   mux.Handle("/static/", http.StripPrefix("/static", fs))
 	godotenv.Load()
