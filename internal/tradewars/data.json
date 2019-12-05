@@ -18,7 +18,7 @@
         },
         {
          "callsign": "clay-town",
-         "online":"no",
+         "online":"yes",
          "location": "2:9",
          "cubits": 20,
          "cargos": [

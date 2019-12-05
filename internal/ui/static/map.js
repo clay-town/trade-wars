@@ -13,22 +13,31 @@ function updateOnlineStatus(callsign, online='yes') {
   var request = new XMLHttpRequest()
   request.open('POST', '/updateonline?callsign='+callsign+'&online='+online, true)
   request.onload = function(){
-    var data = JSON.parse(this.response)
-    // data is a 2d array. the 0th Element :[previousLocation, newlocation]
-    //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
-    console.log(this.response)
+//    var data = JSON.parse(this.response)
+  //  console.log(this.response)
   }
   request.send()
 }
 
-function checkNearby(data, callsign) {
+function checkNearby(data, callsign, currentLocation) {
   var request = new XMLHttpRequest()
   request.open('POST', '/nearby', true)
   request.onload = function(){
     var data = JSON.parse(this.response)
-    // data is a 2d array. the 0th Element :[previousLocation, newlocation]
-    //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
+    // data is a 2d array. the 0th Element is online players :[callsign, location]
+    //                     the 1st Element stations          :[designation, location, designation, location]
+    for (x=0;x <= data[0].length/2; x+=2){
+      if (currentLocation == data[0][x+1] && callsign != data[0][x]) { //At the same coords as another player
+        console.log(data[0][x])
+        console.log("check nearby current location: " + currentLocation)
+          alert("Hello World")
+      }
+    }
+
+
     console.log(this.response)
+
+
   }
   request.send()
 }
@@ -46,11 +55,13 @@ function moveShip(callsign, direction) {
   request.open('POST', '/updatePlayerLocation?callsign='+callsign+"&dir="+direction, true)
   request.onload = function(){
     var data = JSON.parse(this.response)
+    currentLocation = data[0][1]
+    console.log("moveship current location " + currentLocation)
     // data is a 2d array. the 0th Element :[previousLocation, newlocation]
     //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
     updateMap(data, callsign)
     updateLocalPlayerCoords(data)
-    checkNearby(data, callsign)
+    checkNearby(data, callsign, currentLocation)
   }
   request.send()
 }
