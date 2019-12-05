@@ -40,15 +40,8 @@ function checkNearby(data, callsign, currentLocation) {
         $("#dynamicTradeButton3").click(function(){
           tradeWithPlayer(callsign, player2)
           });
-
-
       }
     }
-
-
-    console.log(this.response)
-
-
   }
   request.send()
 }
