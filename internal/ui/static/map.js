@@ -17,8 +17,6 @@ function updateOnlineStatus(callsign, online='yes') {
   var request = new XMLHttpRequest()
   request.open('POST', '/updateonline?callsign='+callsign+'&online='+online, true)
   request.onload = function(){
-//    var data = JSON.parse(this.response)
-  //  console.log(this.response)
   }
   request.send()
 }
