@@ -81,18 +81,18 @@ function updateMap(data, callsign) {
   if (newLoc == stationLoc1) {
       document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
       //insert station name & trade button into Dom
-      document.getElementById("nearby").innerHTML = stationName1;
-      document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton1' type='submit'>Trade</button>"
+      document.getElementById("nearby").innerHTML = stationName1 + "&emsp;";
+      document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton1' type='submit' style='height: 50px; width: 150px; font-size: 35px'>Trade</button>"
   } else if (newLoc == stationLoc2) {
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>"
     //insert station name & trade button into Dom
-    document.getElementById("nearby").innerHTML = stationName2;
-    document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton2' type='submit'>Trade</button>"
+    document.getElementById("nearby").innerHTML = stationName2 + "&emsp;";
+    document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton2' type='submit' style='font-size: 5px'>Trade</button>"
   } else if (oldLoc == stationLoc1 || oldLoc == stationLoc2) {
       // leaving a station
       //paint ship in new location, don't paint over old location
       document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
-      document.getElementById("nearby").innerHTML = "The Great Expanse"
+      document.getElementById("nearby").innerHTML = "The Great Expanse &emsp;"
       document.getElementById("tradeButton").innerHTML = ""
   } else {
     document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
