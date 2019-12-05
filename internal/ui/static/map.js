@@ -61,9 +61,9 @@ function moveShip(callsign, direction) {
     console.log("moveship current location " + currentLocation)
     // data is a 2d array. the 0th Element :[previousLocation, newlocation]
     //                     the 1st Element :[stationName, stationLocation,stationName, stationLocation]
-    updateMap(data, callsign)
     updateLocalPlayerCoords(data)
     checkNearby(data, callsign, currentLocation)
+    updateMap(data, callsign)
   }
   request.send()
 }
@@ -99,6 +99,8 @@ function updateMap(data, callsign) {
   } else {
     document.getElementById(newLoc).innerHTML = shipName1  //move ship to new location on grid
     document.getElementById(oldLoc).innerHTML = "<img src='../static/img/space.jpg'>" //replace old location with empty space
+    document.getElementById("nearby").innerHTML = "The Great Expanse"
+    document.getElementById("tradeButton").innerHTML = ""
   }
   //event listener for trade button click:
   $("#dynamicTradeButton1").click(function(){
