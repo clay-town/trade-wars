@@ -8,6 +8,10 @@ var html = newTable()
 var shipName1 = "<img src='../static/img/spaceShip.jpg'>"
 var stationName1 = "<img src='../static/img/spaceStation.jpg'>"
 
+function tradeWithPlayer(player1, player2){
+  alert(player1+" Wants to trade with " + player2)
+}
+
 function updateOnlineStatus(callsign, online='yes') {
   // set listeners for window.close , to call this function on logout
   var request = new XMLHttpRequest()
@@ -20,6 +24,7 @@ function updateOnlineStatus(callsign, online='yes') {
 }
 
 function checkNearby(data, callsign, currentLocation) {
+  var player2 = ""
   var request = new XMLHttpRequest()
   request.open('POST', '/nearby', true)
   request.onload = function(){
@@ -28,9 +33,15 @@ function checkNearby(data, callsign, currentLocation) {
     //                     the 1st Element stations          :[designation, location, designation, location]
     for (x=0;x <= data[0].length/2; x+=2){
       if (currentLocation == data[0][x+1] && callsign != data[0][x]) { //At the same coords as another player
-        console.log(data[0][x])
+        player2 = data[0][x]
         console.log("check nearby current location: " + currentLocation)
-          alert("Hello World")
+        document.getElementById("nearby").innerHTML = data[0][x]
+        document.getElementById("tradeButton").innerHTML = "<button id='dynamicTradeButton3' type='submit'>Trade</button>"
+        $("#dynamicTradeButton3").click(function(){
+          tradeWithPlayer(callsign, player2)
+          });
+
+
       }
     }
 
